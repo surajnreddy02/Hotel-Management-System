@@ -14,7 +14,7 @@ import dimg3 from "../../assets/images/diningImages/dimg3.webp"
 function Dashboard() {
     return (
 
-        <section id='dashboard'>
+        <section id='dashboard' className='overflow-x-hidden'>
             <div className=''>
 
                 <div
@@ -23,11 +23,11 @@ function Dashboard() {
                         backgroundImage: `url(${dashboardImg1})`,
                         objectFit: "cover"
                     }}>
-                    <div className="hero-overlay bg-opacity-40"></div>
+                    <div className="hero-overlay bg-opacity-60"></div>
                     {/* do not remove the above line it is providing the opacity to the image and the text */}
                     <div className="hero-content text-neutral-content text-center">
                         <div className="w-10/12">
-                            <h1 className="mb-5 md:text-5xl text-2xl font-bold text-white font-italic  ">Welcome to The Sapphire Retreat's Management System
+                            <h1 className="mb-5 md:text-5xl text-2xl font-bold text-white font-italic  ">Welcome to The Sapphire Retreat
                             </h1>
                             <p className="mb-5 text-white text-[15px] font-normal font-rubik">
                                 Manage all aspects of your hotel operations from a single, intuitive platform. Whether you are handling reservations, guest check-ins, or room service requests, our system simplifies and streamlines your workflow.
