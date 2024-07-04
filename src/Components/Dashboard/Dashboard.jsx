@@ -29,7 +29,7 @@ function Dashboard() {
                         <div className="w-10/12">
                             <h1 className="mb-5 md:text-5xl text-2xl font-bold text-white font-italic  ">Welcome to The Sapphire Retreat's Management System
                             </h1>
-                            <p className="mb-5 text-white text-xs font-normal font-rubik">
+                            <p className="mb-5 text-white text-[15px] font-normal font-rubik">
                                 Manage all aspects of your hotel operations from a single, intuitive platform. Whether you are handling reservations, guest check-ins, or room service requests, our system simplifies and streamlines your workflow.
                             </p>
 
@@ -149,7 +149,7 @@ function Dashboard() {
             </section>
 
 
-            <section id='FAQ' className='md:m-8'>
+            <section id='FAQ' className='md:m-8 mb-10'>
                 <div className='flex flex-col gap-4'>
                     <div className="collapse collapse-plus bg-slate-300">
                         <input type="radio" name="my-accordion-3" defaultChecked />

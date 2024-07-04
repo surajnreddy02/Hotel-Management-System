@@ -4,4 +4,8 @@ import Dashboard from "./Components/Dashboard/Dashboard"
 import Login from "./Components/Auth/Login"
 import Carousel from "./Components/Carousel/Carousel"
 import Header from "./Components/Header/Header"
-export { Login, Header, Navbar, Footer, Dashboard, Carousel }
+import Gallery from "./Components/Gallery/Gallery"
+import Contact from "./Components/Contact/Contact"
+import Services from "./Components/Services/Services"
+import Rooms from "./Components/Rooms/Rooms"
+export { Login, Header, Navbar, Footer, Dashboard, Carousel, Services, Contact, Gallery,Rooms }

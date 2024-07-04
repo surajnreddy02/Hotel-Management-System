@@ -6,11 +6,7 @@ function App() {
 
   return (
     <div className='overflow-x-hidden'>
-      <Header />
-      <Navbar />
-      <Dashboard />
-      {/* <Carousel /> */}
-      <Footer />
+
     </div>
   )
 }
