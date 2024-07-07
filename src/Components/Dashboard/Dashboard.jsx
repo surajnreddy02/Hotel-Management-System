@@ -11,6 +11,7 @@ import img3 from "../../assets/images/offerCardImages/img3.avif"
 import dimg1 from "../../assets/images/diningImages/dimg1.jpeg"
 import dimg2 from "../../assets/images/diningImages/dimg2.jpeg"
 import dimg3 from "../../assets/images/diningImages/dimg3.webp"
+import imgx from "../../assets/images/dashboradImage/imgx.jpeg"
 function Dashboard() {
     return (
 
@@ -118,7 +119,7 @@ function Dashboard() {
                 <div className='bg-slate-300 w-auto p-10'>
                     <div className='flex md:flex-row-reverse mb-14 gap-8 justify-center items-center flex-col'>
                         <div className=''>
-                            <img src="https://cache.marriott.com/is/image/marriotts7prod/rcbanga_00028_conversion:Classic-Hor?wid=1300&fit=constrain" alt="" className='md:w-[600px] h-full rounded-lg' />
+                            <img src={imgx} alt="the image" className='md:w-[600px] h-full rounded-lg' />
                         </div>
                         <div className='mt-5'>
                             <h1 className='md:text-3xl sm:text-2xl text-cyan-950 font-semibold'>Marriott Bonvoy on Wheels</h1>

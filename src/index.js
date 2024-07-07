@@ -8,4 +8,6 @@ import Gallery from "./Components/Gallery/Gallery"
 import Contact from "./Components/Contact/Contact"
 import Services from "./Components/Services/Services"
 import Rooms from "./Components/Rooms/Rooms"
-export { Login, Header, Navbar, Footer, Dashboard, Carousel, Services, Contact, Gallery,Rooms }
+import RoomsInfo from "./Components/Rooms/RoomsInfo"
+import Reviews from "./Components/Reviews/Reviews"
+export { Login, Header, Navbar, Footer, Dashboard, Carousel, Services, Contact, Gallery, Rooms, RoomsInfo, Reviews }
