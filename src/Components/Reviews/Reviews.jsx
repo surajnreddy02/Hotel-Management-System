@@ -6,7 +6,7 @@ const Reviews = () => {
         const card = [];
         for (let i = 0; i < n; i++) {
             card.push(
-                <div className='reviewBox w-96 h-72 bg-slate-400 rounded-lg  p-4 pt-5 flex flex-col flex-shrink-0 overflow-y-scroll ' key={i}>
+                <div className='reviewBox w-96 h-72 bg-slate-400 rounded-lg  p-4 pt-5 flex flex-col flex-shrink-0 overflow-y-scroll hover:scale-95 hover:bg-white hover:text-black' key={i}>
                     <div className="name"><h2 className='text-xl font-italic font-bold underline'>Uttam Seervi</h2></div>
                     <div className="rating mt-2 mb-2">
                         <Rating /> {/* Assuming Rating is a valid component */}

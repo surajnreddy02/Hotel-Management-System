@@ -2,7 +2,8 @@ import { createBrowserRouter, createRoutesFromElements, Route, RouterProvider } 
 import ReactDOM from 'react-dom/client';
 import './index.css';
 import Layout from './Layout';
-import { Dashboard, Contact, Rooms, Gallery, Services, RoomsInfo, Reviews } from './index';
+import { Dashboard, Contact, Rooms, Services, RoomsInfo, Reviews, Login, Signup } from './index';
+
 import React from "react";
 
 const route = createBrowserRouter(

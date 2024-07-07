@@ -24,6 +24,9 @@ function Navbar() {
                                 />
                             </svg>
                         </div>
+                        <div className="navbar-end">
+                    <Link to="/button" className="btn">login</Link>
+                </div>
                         <ul className="menu menu-sm dropdown-content bg-base-100 rounded-box z-[1] mt-3 w-52 p-2 shadow text-4xl">
                             <li><Link to="/">Dashboard</Link></li>
                             <li><Link to="/services">Services</Link></li>
