@@ -3,8 +3,9 @@ import ReactDOM from 'react-dom/client';
 import './index.css';
 import Layout from './Layout';
 import { Dashboard, Contact, Rooms, Services, RoomsInfo, Reviews, Login, Signup } from './index';
-
+import Store from "./store/Store"
 import React from "react";
+import { Provider } from "react-redux";
 
 const route = createBrowserRouter(
   createRoutesFromElements(
@@ -22,6 +23,8 @@ const route = createBrowserRouter(
 
 ReactDOM.createRoot(document.getElementById('root')).render(
   <React.StrictMode>
+    <Provider store={Store}>
     <RouterProvider router={route} />
+    </Provider>
   </React.StrictMode>,
 );
