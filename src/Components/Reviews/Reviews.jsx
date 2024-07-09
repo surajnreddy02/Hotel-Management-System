@@ -65,8 +65,9 @@ const Reviews = () => {
                     <div className="form">
                         <form action="#">
                             <div className='flex flex-col gap-5 sm:w-2/3 p-3 lg:w-1/3 mx-auto'>
-                                <input type="text" className='p-2 pl-4 h-16 rounded-lg outline-none' placeholder='Name' name='userName' />
-                                <input type="email" className='p-2 pl-4 h-16 rounded-lg outline-none' placeholder='Email' name='userName' />
+                                <input type="text" className='p-2 pl-4 h-16 rounded-lg outline-none' placeholder='Name' name='fullName' />
+                                <input type="email" className='p-2 pl-4 h-16 rounded-lg outline-none' placeholder='Email' name='email' />
+                                <input type="number" className='p-2 pl-4 h-16 rounded-lg outline-none' placeholder='Rating' name='rating' max={5} min={1} />
                                 <textarea name="message" id="message" placeholder='message...' className='w-auto h-auto p-4 rounded-lg'></textarea>
                             </div>
                             <div className="btn flex items-center w-48 mx-auto hover:bg-black hover:text-white">

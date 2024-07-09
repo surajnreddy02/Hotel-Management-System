@@ -10,7 +10,7 @@ import img8 from "../../assets/images/carouselImages/img8.jpg"
 
 const Carousel = () => {
     return (
-        <div className="carousel carousel-end rounded-box w-screen">
+        <div className="carousel carousel-end rounded-box w-screen scroll-smooth">
             <div className='flex gap-4'>
                 <div className="carousel-item rounded-md">
                     <img src={img1} alt="Drink" className='w-[550px] h-[420px] rounded-md transform transition-transform duration-300 hover:scale-105 cursor-pointer' />

@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
 import { Switch } from '@headlessui/react';
-// import { HiBuildingOffice2 } from 'react-icons/hi';
 import { FaBuilding } from "react-icons/fa";
 import { FaPhoneVolume } from 'react-icons/fa';
 import { MdEmail } from 'react-icons/md';
@@ -17,7 +16,7 @@ export default function Contact() {
                         <p className="text-lg text-black mb-6">
                             For immediate assistance, you can also reach us through the contact details provided below. Our team is available during our operating hours to ensure you have a pleasant experience with us.
                         </p>
-                        <div className='flex  flex-col gap-4'>
+                        <div className='flex flex-col gap-4'>
                             <div className="flex items-center">
                                 <p className="text-black text-xl">
                                     <FaBuilding />
@@ -52,32 +51,23 @@ export default function Contact() {
                                 <label htmlFor="first-name" className="block text-sm font-semibold text-gray-900">First name</label>
                                 <input
                                     id="first-name"
-                                    name="first-name"
+                                    name="firstName"
                                     type="text"
                                     autoComplete="given-name"
-                                    className="block w-full px-3.5 py-2 text-gray-900 rounded-md border border-gray-300 focus:ring-2 focus:ring-indigo-600 focus:border-transparent sm:text-sm"
+                                    className="block w-full px-3.5 py-2 text-white bg-gray-800 rounded-md border border-gray-300 focus:ring-2 focus:ring-indigo-600 focus:border-transparent sm:text-sm"
                                 />
                             </div>
                             <div>
                                 <label htmlFor="last-name" className="block text-sm font-semibold text-gray-900">Last name</label>
                                 <input
                                     id="last-name"
-                                    name="last-name"
+                                    name="lastName"
                                     type="text"
                                     autoComplete="family-name"
-                                    className="block w-full px-3.5 py-2 text-gray-900 rounded-md border border-gray-300 focus:ring-2 focus:ring-indigo-600 focus:border-transparent sm:text-sm"
+                                    className="block w-full px-3.5 py-2 text-white bg-gray-800 rounded-md border border-gray-300 focus:ring-2 focus:ring-indigo-600 focus:border-transparent sm:text-sm"
                                 />
                             </div>
-                            <div className="sm:col-span-2">
-                                <label htmlFor="company" className="block text-sm font-semibold text-gray-900">Company</label>
-                                <input
-                                    id="company"
-                                    name="company"
-                                    type="text"
-                                    autoComplete="organization"
-                                    className="block w-full px-3.5 py-2 text-gray-900 rounded-md border border-gray-300 focus:ring-2 focus:ring-indigo-600 focus:border-transparent sm:text-sm"
-                                />
-                            </div>
+
                             <div className="sm:col-span-2">
                                 <label htmlFor="email" className="block text-sm font-semibold text-gray-900">Email</label>
                                 <input
@@ -85,11 +75,11 @@ export default function Contact() {
                                     name="email"
                                     type="email"
                                     autoComplete="email"
-                                    className="block w-full px-3.5 py-2 text-gray-900 rounded-md border border-gray-300 focus:ring-2 focus:ring-indigo-600 focus:border-transparent sm:text-sm"
+                                    className="block w-full px-3.5 py-2 text-white bg-gray-800 rounded-md border border-gray-300 focus:ring-2 focus:ring-indigo-600 focus:border-transparent sm:text-sm"
                                 />
                             </div>
                             <div className="sm:col-span-2">
-                                <label htmlFor="phone-number" className="block text-sm font-semibold text-gray-900">Phone number</label>
+                                <label htmlFor="phoneNumber" className="block text-sm font-semibold text-gray-900">Phone number</label>
                                 <div className="relative mt-1">
                                     <div className="absolute inset-y-0 left-0 flex items-center">
                                         <label htmlFor="country" className="sr-only">Country</label>
@@ -109,7 +99,7 @@ export default function Contact() {
                                         name="phoneNumber"
                                         type="tel"
                                         autoComplete="tel"
-                                        className="block w-full px-3.5 py-2 pl-20 text-gray-900 rounded-md border border-gray-300 focus:ring-2 focus:ring-indigo-600 focus:border-transparent sm:text-sm"
+                                        className="block w-full px-3.5 py-2 pl-20 text-white bg-gray-800 rounded-md border border-gray-300 focus:ring-2 focus:ring-indigo-600 focus:border-transparent sm:text-sm"
                                     />
                                 </div>
                             </div>
@@ -119,10 +109,9 @@ export default function Contact() {
                                     id="message"
                                     name="message"
                                     rows={4}
-                                    className="block w-full px-3.5 py-2 text-gray-900 rounded-md border border-gray-300 focus:ring-2 focus:ring-indigo-600 focus:border-transparent placeholder-gray-400 sm:text-sm"
+                                    className="block w-full px-3.5 py-2 text-white bg-gray-800 rounded-md border border-gray-300 focus:ring-2 focus:ring-indigo-600 focus:border-transparent placeholder-gray-400 sm:text-sm"
                                 ></textarea>
                             </div>
-
                         </div>
                         <div className="mt-8">
                             <button
