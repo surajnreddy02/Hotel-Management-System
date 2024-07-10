@@ -33,10 +33,10 @@ const Rooms = () => {
                         <p className="text-cyan-900 text-xl"><Rating /></p>
                     </div>
                     <div className="btn mt-3 w-full hover:bg-gray-700">
-                        <Link to="/rooms/roomInfo" 
-                        onClick={()=>{navigate("/")}}
-                        className="block p-3 w-full h-full">
-                            Book now
+                        <Link to={`/rooms/${i}`}
+                            // onClick={() => navigate(`/rooms/${i}`)}
+                            className="block p-3 w-full h-full">
+                            More Info
                         </Link>
                     </div>
                 </div>

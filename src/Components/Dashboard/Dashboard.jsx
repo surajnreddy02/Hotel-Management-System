@@ -34,7 +34,7 @@ function Dashboard() {
                                 Manage all aspects of your hotel operations from a single, intuitive platform. Whether you are handling reservations, guest check-ins, or room service requests, our system simplifies and streamlines your workflow.
                             </p>
 
-                            <button className="btn btn-primary">Get Started</button>
+                            <Link to="/rooms" className='btn bg-transparent backdrop-blur-md font-bold hover:underline outline-none'>Get Started</Link>
                         </div>
                     </div>
                 </div>

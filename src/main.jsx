@@ -50,9 +50,8 @@ const route = createBrowserRouter(
       <Route path='/' element={<Layout />}>
         <Route index element={<Dashboard />} />
         <Route path='contact' element={<Contact />} />
-        <Route path='rooms' element={<Rooms />}>
-          <Route path='roomInfo' element={<RoomsInfo />} />
-        </Route>
+        <Route path='rooms' element={<Rooms />} />
+        <Route path='rooms/:roomId' element={<RoomsInfo />} />
         <Route path='reviews' element={<Reviews />} />
         <Route path='services' element={<Services />} />
       </Route>
@@ -62,12 +61,8 @@ const route = createBrowserRouter(
 
         <Route path="dashboard" element={<AdminDashboard />} />
         <Route path="rooms" element={<AdminRooms />} />
-        <Route path="departments" element={<AdminDepartment />} >
-          {/* <Route path=":deptId" element={<AdminEmployee/>} /> */}
-          {/* <Route path="admin/departments/:deptId" element={<AdminEmployee />} /> */}
-
-        </Route>
-
+        <Route path="departments" element={<AdminDepartment />} />
+        <Route path="departments/:deptId" element={<AdminEmployee />} />
 
       </Route>
     </>
