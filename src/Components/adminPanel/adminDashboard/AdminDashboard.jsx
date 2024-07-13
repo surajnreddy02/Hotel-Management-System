@@ -1,9 +1,9 @@
 import React from 'react'
-
+import {Dashboard} from "../../../index"
 const AdminDashboard = () => {
     return (
         <div>
-            this is the admin dashboard
+         <Dashboard/>
         </div>
     )
 }

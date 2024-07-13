@@ -58,7 +58,6 @@ const route = createBrowserRouter(
       {/* USER ROUTES OVER--------------------------> */}
       {/* The admin routes are from here */}
       <Route path='/admin' element={<AdminLayout />}>
-
         <Route path="dashboard" element={<AdminDashboard />} />
         <Route path="rooms" element={<AdminRooms />} />
         <Route path="departments" element={<AdminDepartment />} />
