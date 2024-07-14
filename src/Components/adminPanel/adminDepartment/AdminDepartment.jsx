@@ -1,5 +1,6 @@
 import React from 'react';
 import { Link } from "react-router-dom";
+import { DepartmentList } from "../adminIndex"
 
 const AdminRooms = () => {
     const departments = [
@@ -52,31 +53,8 @@ const AdminRooms = () => {
                         </div>
                     </form>
                 </div>
-                <div id="roomsList" className='mt-10'>
-                    <h2 className='text-3xl text-center text-cyan-950 font-italic font-bold underline mb-3'>Employee List</h2>
-                    <div className="overflow-x-auto">
-                        <table className="table">
-                            {/* head */}
-                            <thead>
-                                <tr className='text-[14px] font-rubik text-black'>
-                                    <th></th>
-                                    <th>Department Name</th>
-                                    <th>Department Id</th>
-                                    <th>Total Employees</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                {departments.map((dept, index) => (
-                                    <tr key={dept._id} className='text-gray-800'>
-                                        <th>{index + 1}</th>
-                                        <td><Link to={`/admin/departments/${dept.deptId}`}>{dept.name}</Link></td>
-                                        <td>{dept.deptId}</td>
-                                        <td>{dept.totalEmployees}</td>
-                                    </tr>
-                                ))}
-                            </tbody>
-                        </table>
-                    </div>
+                <div id='departmentList'>
+                    <DepartmentList />
                 </div>
             </div>
         </section>

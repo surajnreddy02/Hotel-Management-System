@@ -1,34 +1,4 @@
-// import { createBrowserRouter, createRoutesFromElements, Route, RouterProvider } from "react-router-dom";
-// import ReactDOM from 'react-dom/client';
-// import './index.css';
-// import Layout from './Layout';
-// import { Dashboard, Contact, Rooms, Services, RoomsInfo, Reviews, Login, Signup } from './index';
-// import Store from "./store/Store"
-// import React from "react";
-// import { Provider } from "react-redux";
-// import { AdminDashboard, AdminHeader } from "./Components/adminPanel/adminIndex"
 
-// const route = createBrowserRouter(
-//   createRoutesFromElements(
-//     <Route path='/' element={<Layout />}>
-//       <Route index element={<Dashboard />} />
-//       <Route path='contact' element={<Contact />} />
-//       <Route path='rooms' element={<Rooms />}>
-//         <Route path='roomInfo' element={<RoomsInfo />} />
-//       </Route>
-//       <Route path='reviews' element={<Reviews />} />
-//       <Route path='services' element={<Services />} />
-//     </Route>
-//   )
-// );
-
-// ReactDOM.createRoot(document.getElementById('root')).render(
-//   <React.StrictMode>
-//     <Provider store={Store}>
-//       <RouterProvider router={route} />
-//     </Provider>
-//   </React.StrictMode>,
-// );
 import React from "react";
 import { createBrowserRouter, createRoutesFromElements, Route, RouterProvider } from "react-router-dom";
 import ReactDOM from 'react-dom/client';
@@ -36,12 +6,12 @@ import './index.css';
 // layout's
 import Layout from './Layout';
 import AdminLayout from "./Components/adminPanel/AdminLayout";
-// redux store
+// redux store    
 import Store from "./store/Store";
 import { Provider } from "react-redux";
 
 // importing components
-import { Dashboard, Contact, Rooms, Services, RoomsInfo, Reviews, Login, Signup } from './index';
+import { Dashboard, Contact, Rooms, Services, RoomsInfo, Reviews, Login, Signup, Payment } from './index';
 import { AdminDashboard, AdminDepartment, AdminEmployee, AdminRooms, AdminHeader } from "./Components/adminPanel/adminIndex"
 
 const route = createBrowserRouter(
@@ -49,9 +19,13 @@ const route = createBrowserRouter(
     <>
       <Route path='/' element={<Layout />}>
         <Route index element={<Dashboard />} />
+        <Route path="login" element={<Login />} />
+        <Route path="/signup" element={<Signup />} />
+        <Route path="/dashboard" element={<Dashboard />} />
         <Route path='contact' element={<Contact />} />
         <Route path='rooms' element={<Rooms />} />
         <Route path='rooms/:roomId' element={<RoomsInfo />} />
+        <Route path='rooms/:roomId/payment' element={<Payment />} />
         <Route path='reviews' element={<Reviews />} />
         <Route path='services' element={<Services />} />
       </Route>

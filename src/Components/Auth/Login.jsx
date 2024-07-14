@@ -1,7 +1,33 @@
-import React from "react";
-import { Link } from "react-router-dom";
+import React, { useState } from "react";
+import { Link, useNavigate } from "react-router-dom";
+import { login } from "../../store/AuthSlice"
+import { useDispatch, useSelector } from "react-redux";
+import axios from "axios";
 
 export default function Login() {
+    const [email, setEmail] = useState("");
+    const [password, setPassword] = useState("");
+    const [error, setError] = useState(null);
+    const navigate = useNavigate();
+    const dispatch = useDispatch();
+    const handleSubmit = async (e) => {
+        e.preventDefault();
+        try {
+            const response = await axios.post("http://localhost:5000/api/v1/users/login", {
+                email,
+                password,
+            });
+
+            console.log("Login successful", response.data);
+            dispatch(login(response.data));
+            navigate("/dashboard")
+
+        } catch (error) {
+            setError(error.response.data.message);
+            console.error("Error signing in:", error.response.data.message);
+        }
+    };
+
     return (
         <div className="flex min-h-full flex-1 flex-col justify-center px-6 py-12 lg:px-8">
             <div className="sm:mx-auto sm:w-full sm:max-w-sm">
@@ -11,7 +37,7 @@ export default function Login() {
             </div>
 
             <div className="mt-10 sm:mx-auto sm:w-full sm:max-w-sm">
-                <form className="space-y-6 bg-white p-3 rounded-md shadow-md" action="#" method="POST">
+                <form className="space-y-6 bg-white p-3 rounded-md shadow-md" onSubmit={handleSubmit}>
                     <div>
                         <label htmlFor="email" className="block text-sm font-medium leading-6 text-gray-900">
                             Email address
@@ -23,6 +49,8 @@ export default function Login() {
                                 type="email"
                                 autoComplete="email"
                                 required
+                                value={email}
+                                onChange={(e) => setEmail(e.target.value)}
                                 className="block w-full rounded-md border-0 py-2 px-3 text-gray-900 bg-white shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
                             />
                         </div>
@@ -34,7 +62,10 @@ export default function Login() {
                                 Password
                             </label>
                             <div className="text-sm">
-                                <Link to="/forgot-password" className="font-semibold text-indigo-600 hover:text-indigo-500">
+                                <Link
+                                    to="/forgot-password"
+                                    className="font-semibold text-indigo-600 hover:text-indigo-500"
+                                >
                                     Forgot password?
                                 </Link>
                             </div>
@@ -46,10 +77,18 @@ export default function Login() {
                                 type="password"
                                 autoComplete="current-password"
                                 required
+                                value={password}
+                                onChange={(e) => setPassword(e.target.value)}
                                 className="block w-full rounded-md border-0 py-2 px-3 text-gray-900 bg-white shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
                             />
                         </div>
                     </div>
+
+                    {error && (
+                        <div className="text-red-500 text-sm mt-2">
+                            {error}
+                        </div>
+                    )}
 
                     <div>
                         <button
@@ -62,8 +101,11 @@ export default function Login() {
                 </form>
 
                 <p className="mt-10 text-center text-sm text-gray-500">
-                    Don't have an account?{' '}
-                    <Link to="/signup" className="font-semibold leading-6 text-indigo-600 hover:text-indigo-500">
+                    Don't have an account?{" "}
+                    <Link
+                        to="/signup"
+                        className="font-semibold leading-6 text-indigo-600 hover:text-indigo-500"
+                    >
                         Sign up
                     </Link>
                 </p>

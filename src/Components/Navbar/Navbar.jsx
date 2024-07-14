@@ -1,9 +1,10 @@
 import React from 'react';
 import { Link, NavLink } from 'react-router-dom';
 import { useSelector } from 'react-redux'
-import { Header, Logout } from "../../index"
+import { Header, Logout, Login } from "../../index"
+
 function Navbar() {
-    // const authStatus = useSelector((state)=> state.auth.status);
+    const authStatus = useSelector((state) => state.auth.status);
 
 
 
@@ -29,9 +30,7 @@ function Navbar() {
                             </svg>
                         </div>
                         {/*  fdfffffffffffffffffffffff */}
-                        <div className="navbar-end">
-                            <Link to="/button" className="btn">login</Link>
-                        </div>
+
                         <ul className="menu menu-sm dropdown-content bg-base-100 rounded-box z-[1] mt-3 w-52 p-2 shadow text-4xl">
                             <li><Link to="/">Dashboard</Link></li>
                             <li><Link to="/services">Services</Link></li>
@@ -51,7 +50,15 @@ function Navbar() {
                         <li><Link to="/contact">Contact Us</Link></li>
                     </ul>
                 </div>
-                {/* <Logout /> */}
+                <div className="navbar-end">
+                    {
+                        authStatus ? (
+                            <Link to="/logout" className="btn">logout</Link>
+                        ) : (
+                            <Link to="/login" className="btn">login</Link>
+                        )
+                    }
+                </div>
             </div>
         </div>
     );

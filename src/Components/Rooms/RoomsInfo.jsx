@@ -3,6 +3,7 @@ import img1 from "../../assets/images/carouselImages/img1.jpg"
 import Rating from './Rating'
 import { Link } from "react-router-dom"
 const RoomsInfo = () => {
+    const roomId = 1
     return (
         <section className='h-auto mb-20 p-4 pb-16 bg-slate-400 mt-10'>
             <div>
@@ -50,7 +51,7 @@ const RoomsInfo = () => {
 
                         <Link
                             // take the roomId from the params
-                            to="/rooms/:roomId/payment"
+                            to={`/rooms/${roomId}/payment`}
                             className='btn w-4/6 hover:scale-x-105 hover:bg-black hover:text-white mt-5'
                         >
                             Book Now

@@ -11,6 +11,7 @@ import RoomsInfo from "./Components/Rooms/RoomsInfo"
 import Reviews from "./Components/Reviews/Reviews"
 import Signup from "./Components/Auth/Signup"
 import Logout from "./Components/Auth/Logout"
+import Payment from "./Components/Rooms/Payment"
 export {
     Login,
     Header,
@@ -24,5 +25,6 @@ export {
     RoomsInfo,
     Reviews,
     Signup,
-    Logout
+    Logout,
+    Payment
 }
