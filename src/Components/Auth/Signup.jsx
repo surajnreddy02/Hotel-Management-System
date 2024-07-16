@@ -1,20 +1,21 @@
 import axios from "axios";
 import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import { login } from "../../store/AuthSlice"
-
+import { login } from "../../store/AuthSlice.js"
+import { useDispatch } from "react-redux";
 export default function SignUp() {
     const navigate = useNavigate();
     const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
     const [email, setEmail] = useState('');
     const [error, setError] = useState(null);
-    const [loading, setLoading] = useState(false); 
+    const [loading, setLoading] = useState(false);
+    const dispatch = useDispatch();
 
     const handleSubmit = async (e) => {
         e.preventDefault();
         setLoading(true);
-        setError(null); 
+        setError(null);
 
         try {
             const response = await axios.post("http://localhost:5000/api/v1/users/register", {
@@ -23,6 +24,7 @@ export default function SignUp() {
                 password
             });
             console.log(response.data);
+            dispatch(login(response.data))
             navigate("/dashboard");
 
         } catch (error) {

@@ -7,4 +7,13 @@ import AdminFooter from "./adminFooter/AdminFooter";
 import RoomsList from "./adminRooms/RoomsList";
 import DepartmentList from "./adminDepartment/DepartmentList"
 
-export { AdminHeader, AdminDashboard, AdminDepartment, AdminEmployee, AdminRooms, AdminFooter, RoomsList, DepartmentList }
+export {
+    AdminHeader,
+    AdminDashboard,
+    AdminDepartment,
+    AdminEmployee,
+    AdminRooms,
+    AdminFooter,
+    RoomsList,
+    DepartmentList
+}

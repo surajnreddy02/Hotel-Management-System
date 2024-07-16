@@ -7,11 +7,11 @@ import './index.css';
 import Layout from './Layout';
 import AdminLayout from "./Components/adminPanel/AdminLayout";
 // redux store    
-import Store from "./store/Store";
+import Store from "./store/Store.js";
 import { Provider } from "react-redux";
 
 // importing components
-import { Dashboard, Contact, Rooms, Services, RoomsInfo, Reviews, Login, Signup, Payment } from './index';
+import { Dashboard, Contact, Rooms, Services, RoomsInfo, Reviews, Login, Signup, Payment, Logout } from './index';
 import { AdminDashboard, AdminDepartment, AdminEmployee, AdminRooms, AdminHeader } from "./Components/adminPanel/adminIndex"
 
 const route = createBrowserRouter(
@@ -20,7 +20,8 @@ const route = createBrowserRouter(
       <Route path='/' element={<Layout />}>
         <Route index element={<Dashboard />} />
         <Route path="login" element={<Login />} />
-        <Route path="/signup" element={<Signup />} />
+        <Route path="signup" element={<Signup />} />
+        {/* <Route path="logout" element={<Logout />} /> */}
         <Route path="/dashboard" element={<Dashboard />} />
         <Route path='contact' element={<Contact />} />
         <Route path='rooms' element={<Rooms />} />

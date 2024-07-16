@@ -12,6 +12,7 @@ import Reviews from "./Components/Reviews/Reviews"
 import Signup from "./Components/Auth/Signup"
 import Logout from "./Components/Auth/Logout"
 import Payment from "./Components/Rooms/Payment"
+import ReviewsList from "./Components/Reviews/ReviewsList"
 export {
     Login,
     Header,
@@ -26,5 +27,6 @@ export {
     Reviews,
     Signup,
     Logout,
-    Payment
+    Payment,
+    ReviewsList
 }

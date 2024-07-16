@@ -1,11 +1,42 @@
 import React, { useState } from 'react';
-import { Switch } from '@headlessui/react';
 import { FaBuilding } from "react-icons/fa";
 import { FaPhoneVolume } from 'react-icons/fa';
 import { MdEmail } from 'react-icons/md';
+import axios from "axios";
 
 export default function Contact() {
-    const [agreed, setAgreed] = useState(false);
+    const [firstName, setFirstName] = useState('');
+    const [lastName, setLastName] = useState('');
+    const [email, setEmail] = useState('');
+    const [phone, setPhone] = useState(''); // Change state variable name to 'phone'
+    const [message, setMessage] = useState('');
+    const [error, setError] = useState(null);
+    const [loading, setLoading] = useState(false);
+
+    const handleSubmit = async (e) => {
+        e.preventDefault();
+        setLoading(true);
+        try {
+            const response = await axios.post("http://localhost:5000/api/v1/contact/send-message", {
+                firstName,
+                lastName,
+                email,
+                phoneNumber: phone, // Use 'phone' state variable here
+                message
+            });
+            console.log("Response data:", response.data);
+            setFirstName('');
+            setLastName('');
+            setEmail('');
+            setPhone('');
+            setMessage('');
+        } catch (error) {
+            setError(error);
+            console.error("Error:", error);
+        } finally {
+            setLoading(false);
+        }
+    };
 
     return (
         <section className="bg-white overflow-hidden">
@@ -26,11 +57,11 @@ export default function Contact() {
                             <div className="flex items-center">
                                 <p className="text-black text-xl">
                                     <FaPhoneVolume />
-                                </p >
+                                </p>
                                 <p className="text-xl text-black ml-2">8147146317</p>
                             </div>
                             <div className="flex items-center">
-                                <p className='text-black text-x'>
+                                <p className='text-black text-xl'>
                                     <MdEmail />
                                 </p>
                                 <p className="text-xl text-black ml-2">uttam.is22@bmsce.ac.in</p>
@@ -45,13 +76,15 @@ export default function Contact() {
                             We'd love to hear from you! Whether you have a question, need assistance, or simply want to provide feedback, our team is here to help. Please fill out the form below to send us a message at any time. We strive to respond to all inquiries promptly.
                         </p>
                     </div>
-                    <form action="#" method="POST" className="mx-auto mt-16 max-w-xl sm:mt-20">
+                    <form onSubmit={handleSubmit} className="mx-auto mt-16 max-w-xl sm:mt-20">
                         <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 font-italic">
                             <div>
                                 <label htmlFor="first-name" className="block text-sm font-semibold text-gray-900">First name</label>
                                 <input
                                     id="first-name"
                                     name="firstName"
+                                    value={firstName}
+                                    onChange={(e) => setFirstName(e.target.value)}
                                     type="text"
                                     autoComplete="given-name"
                                     className="block w-full px-3.5 py-2 text-white bg-gray-800 rounded-md border border-gray-300 focus:ring-2 focus:ring-indigo-600 focus:border-transparent sm:text-sm"
@@ -62,6 +95,8 @@ export default function Contact() {
                                 <input
                                     id="last-name"
                                     name="lastName"
+                                    value={lastName}
+                                    onChange={(e) => setLastName(e.target.value)}
                                     type="text"
                                     autoComplete="family-name"
                                     className="block w-full px-3.5 py-2 text-white bg-gray-800 rounded-md border border-gray-300 focus:ring-2 focus:ring-indigo-600 focus:border-transparent sm:text-sm"
@@ -73,6 +108,8 @@ export default function Contact() {
                                 <input
                                     id="email"
                                     name="email"
+                                    value={email}
+                                    onChange={(e) => setEmail(e.target.value)}
                                     type="email"
                                     autoComplete="email"
                                     className="block w-full px-3.5 py-2 text-white bg-gray-800 rounded-md border border-gray-300 focus:ring-2 focus:ring-indigo-600 focus:border-transparent sm:text-sm"
@@ -81,25 +118,14 @@ export default function Contact() {
                             <div className="sm:col-span-2">
                                 <label htmlFor="phoneNumber" className="block text-sm font-semibold text-gray-900">Phone number</label>
                                 <div className="relative mt-1">
-                                    <div className="absolute inset-y-0 left-0 flex items-center">
-                                        <label htmlFor="country" className="sr-only">Country</label>
-                                        <select
-                                            id="country"
-                                            name="country"
-                                            className="h-full px-3.5 py-2 text-white rounded-md border border-gray-300 bg-gray-800 focus:ring-2 focus:ring-indigo-600 focus:border-transparent sm:text-sm"
-                                        >
-                                            <option>IN</option>
-                                            <option>US</option>
-                                            <option>CA</option>
-                                            <option>EU</option>
-                                        </select>
-                                    </div>
                                     <input
                                         id="phoneNumber"
                                         name="phoneNumber"
-                                        type="tel"
-                                        autoComplete="tel"
-                                        className="block w-full px-3.5 py-2 pl-20 text-white bg-gray-800 rounded-md border border-gray-300 focus:ring-2 focus:ring-indigo-600 focus:border-transparent sm:text-sm"
+                                        value={phone}
+                                        onChange={(e) => setPhone(e.target.value)}
+                                        type="text"
+                                        // autoComplete=""
+                                        className="block w-full px-3.5 py-2  text-white bg-gray-800 rounded-md border border-gray-300 focus:ring-2 focus:ring-indigo-600 focus:border-transparent sm:text-sm"
                                     />
                                 </div>
                             </div>
@@ -108,17 +134,22 @@ export default function Contact() {
                                 <textarea
                                     id="message"
                                     name="message"
+                                    value={message}
+                                    onChange={(e) => setMessage(e.target.value)}
                                     rows={4}
                                     className="block w-full px-3.5 py-2 text-white bg-gray-800 rounded-md border border-gray-300 focus:ring-2 focus:ring-indigo-600 focus:border-transparent placeholder-gray-400 sm:text-sm"
                                 ></textarea>
                             </div>
+                        </div>
+                        <div>
+                            <p className='text-red-800 text-xs m-2'>{error}</p>
                         </div>
                         <div className="mt-8">
                             <button
                                 type="submit"
                                 className="w-full px-3.5 py-2.5 text-center text-sm font-semibold font-italic text-white bg-indigo-600 rounded-md shadow-sm hover:bg-indigo-500 focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-indigo-600"
                             >
-                                Let's talk
+                                {loading ? "Submitting" : "Let's talk"}
                             </button>
                         </div>
                     </form>

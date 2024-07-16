@@ -1,17 +1,21 @@
 import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import { login } from "../../store/AuthSlice"
-import { useDispatch, useSelector } from "react-redux";
+import { login } from "../../store/AuthSlice";
+import { useDispatch } from "react-redux";
 import axios from "axios";
 
 export default function Login() {
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
     const [error, setError] = useState(null);
+    const [loading, setLoading] = useState(false);
     const navigate = useNavigate();
     const dispatch = useDispatch();
+
     const handleSubmit = async (e) => {
         e.preventDefault();
+        setLoading(true);
+
         try {
             const response = await axios.post("http://localhost:5000/api/v1/users/login", {
                 email,
@@ -19,12 +23,13 @@ export default function Login() {
             });
 
             console.log("Login successful", response.data);
-            dispatch(login(response.data));
-            navigate("/dashboard")
-
+            dispatch(login(response.data)); 
+            navigate("/dashboard");
         } catch (error) {
-            setError(error.response.data.message);
-            console.error("Error signing in:", error.response.data.message);
+            setError(error.message);
+            console.error("Error signing in:", error.message);
+        } finally {
+            setLoading(false);
         }
     };
 
@@ -61,14 +66,6 @@ export default function Login() {
                             <label htmlFor="password" className="block text-sm font-medium leading-6 text-gray-900">
                                 Password
                             </label>
-                            <div className="text-sm">
-                                <Link
-                                    to="/forgot-password"
-                                    className="font-semibold text-indigo-600 hover:text-indigo-500"
-                                >
-                                    Forgot password?
-                                </Link>
-                            </div>
                         </div>
                         <div className="mt-2">
                             <input
@@ -94,8 +91,9 @@ export default function Login() {
                         <button
                             type="submit"
                             className="flex w-full justify-center rounded-md bg-indigo-600 px-3 py-2 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
+                            disabled={loading}
                         >
-                            Sign in
+                            {loading ? 'Signing in...' : 'Sign in'}
                         </button>
                     </div>
                 </form>
