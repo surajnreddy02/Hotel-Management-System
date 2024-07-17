@@ -22,15 +22,12 @@ const Rooms = () => {
             cards.push(
                 <div key={i} className="roomCard w-72 h-96 rounded-lg bg-white p-3 flex-shrink-0 hover:scale-105 hover:bg-slate-100">
                     <div className="img">
-                        <img src={img[i]} alt="Room" className="w-80 h-full rounded-lg mt-2 mb-2" />
-                    </div>
-                    <div className="heading text-cyan-950">
-                        <h2>Crown Suite</h2>
+                        <img src={img[i]} alt="Room" className="w-80 h-52 rounded-lg mt-2 mb-2" />
                     </div>
                     <div>
                         <p className="text-cyan-900">1 Bedroom Suite, 1 King</p>
                         <p className="text-cyan-900">&#8377; 1800 per night</p>
-                        <p className="text-cyan-900 text-xl"><Rating /></p>
+                        {/* <p className="text-cyan-900 text-xl"><Rating /></p> */}
                     </div>
                     <div className="btn mt-3 w-full hover:bg-gray-700">
                         <Link to={`/rooms/${i}`}

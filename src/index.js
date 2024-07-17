@@ -13,6 +13,8 @@ import Signup from "./Components/Auth/Signup"
 import Logout from "./Components/Auth/Logout"
 import Payment from "./Components/Rooms/Payment"
 import ReviewsList from "./Components/Reviews/ReviewsList"
+import Success from "./Components/Rooms/Success"
+import Failure from "./Components/Rooms/Failure"
 export {
     Login,
     Header,
@@ -28,5 +30,7 @@ export {
     Signup,
     Logout,
     Payment,
-    ReviewsList
+    ReviewsList,
+    Success,
+    Failure
 }

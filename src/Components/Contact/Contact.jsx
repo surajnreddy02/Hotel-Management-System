@@ -24,7 +24,7 @@ export default function Contact() {
                 phoneNumber: phone, // Use 'phone' state variable here
                 message
             });
-            console.log("Response data:", response.data);
+            // console.log("Response data:", response.data);
             setFirstName('');
             setLastName('');
             setEmail('');

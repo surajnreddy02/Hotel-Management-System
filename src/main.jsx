@@ -11,7 +11,7 @@ import Store from "./store/Store.js";
 import { Provider } from "react-redux";
 
 // importing components
-import { Dashboard, Contact, Rooms, Services, RoomsInfo, Reviews, Login, Signup, Payment, Logout } from './index';
+import { Dashboard, Contact, Rooms, Services, RoomsInfo, Reviews, Login, Signup, Payment, Logout, Success, Failure } from './index';
 import { AdminDashboard, AdminDepartment, AdminEmployee, AdminRooms, AdminHeader } from "./Components/adminPanel/adminIndex"
 
 const route = createBrowserRouter(
@@ -27,6 +27,8 @@ const route = createBrowserRouter(
         <Route path='rooms' element={<Rooms />} />
         <Route path='rooms/:roomId' element={<RoomsInfo />} />
         <Route path='rooms/:roomId/payment' element={<Payment />} />
+        <Route path='/payment/success' element={<Success />} />
+        <Route path='/payment/failure' element={<Failure />} />
         <Route path='reviews' element={<Reviews />} />
         <Route path='services' element={<Services />} />
       </Route>

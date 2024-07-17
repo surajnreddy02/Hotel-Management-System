@@ -52,6 +52,7 @@ const RoomsInfo = () => {
                         <Link
                             // take the roomId from the params
                             to={`/rooms/${roomId}/payment`}
+                            // to={"/rooms/success"}
                             className='btn w-4/6 hover:scale-x-105 hover:bg-black hover:text-white mt-5'
                         >
                             Book Now

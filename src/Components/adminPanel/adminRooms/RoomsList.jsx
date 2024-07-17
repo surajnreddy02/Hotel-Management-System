@@ -1,8 +1,36 @@
-import React from 'react'
-
+import React, { useEffect, useState } from 'react'
+import axios from 'axios'
 const RoomsList = () => {
+    const [rooms, setRooms] = useState([]);
+    const [loading, setLoading] = useState(false);
+    const [error, setError] = useState(null);
+    useEffect(() => {
+
+        const fetchRoom = async () => {
+            setLoading(true)
+            try {
+                const response = await axios.get("http://localhost:5000/api/v1/rooms/get-rooms")
+                // console.log(response.data.data)
+                setRooms(response.data.data)
+            } catch (error) {
+                setError(error.message);
+                console.log("Got the error while fetching the rooms", error);
+            } finally {
+                setLoading(false)
+            }
+
+        }
+        fetchRoom()
+    }, [])
+
+
+
+
     return (
-        <div id="roomsList" className='mt-10'>
+
+
+
+        <div div id="roomsList" className='mt-10 h-4/5 overflow-auto' >
             <h2 className='text-3xl text-center text-cyan-950 font-italic font-bold underline mb-3'>Rooms List</h2>
             <div className="overflow-x-auto">
                 <table className="table">
@@ -16,52 +44,21 @@ const RoomsList = () => {
                         </tr>
                     </thead>
                     <tbody>
-                        {/* row 1 */}
-                        <tr className='text-gray-800'>
-                            <th>1</th>
-                            <td>R001</td>
-                            <td>Presidential Suite</td>
-                            <td>$5000</td>
-                        </tr>
-                        {/* row 2 */}
-                        <tr className='text-gray-800'>
-                            <th>2</th>
-                            <td>R002</td>
-                            <td>Luxury Suite</td>
-                            <td>$3500</td>
-                        </tr>
-                        {/* row 3 */}
-                        <tr className='text-gray-800'>
-                            <th>3</th>
-                            <td>R003</td>
-                            <td>Premium Room</td>
-                            <td>$2000</td>
-                        </tr>
-                        {/* row 4 */}
-                        <tr className='text-gray-800'>
-                            <th>4</th>
-                            <td>R004</td>
-                            <td>Presidential Suite</td>
-                            <td>$5000</td>
-                        </tr>
-                        {/* row 5 */}
-                        <tr className='text-gray-800'>
-                            <th>5</th>
-                            <td>R005</td>
-                            <td>Luxury Suite</td>
-                            <td>$3500</td>
-                        </tr>
-                        {/* row 6 */}
-                        <tr className='text-gray-800'>
-                            <th>6</th>
-                            <td>R006</td>
-                            <td>Premium Room</td>
-                            <td>$2000</td>
-                        </tr>
+                        {loading? ( <h1 className='text-3xl font-bold text-center mt-10'>Loading.....</h1>):(rooms.map((room, index) => (
+                            <tr className='text-gray-800'>
+                                <th>{index + 1}</th>
+                                <td>{room._id}</td>
+                                <td>{room.roomType}</td>
+                                <td>${room.cost}</td>
+                            </tr>
+                        )))}
+
                     </tbody>
                 </table>
             </div>
-        </div>
+
+        </div >
+
     )
 }
 

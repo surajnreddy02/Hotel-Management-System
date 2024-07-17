@@ -3,8 +3,10 @@ import { Link } from "react-router-dom";
 import { DepartmentList } from "../adminIndex";
 import axios from 'axios';
 
+
 const AdminDepartment = () => {
     const [departments, setDepartments] = useState([]);
+    const [email, setEmail] = useState("")
     const [age, setAge] = useState("");
     const [name, setName] = useState("");
     const [designation, setDesignation] = useState("");
@@ -34,6 +36,7 @@ const AdminDepartment = () => {
                 age,
                 name,
                 designation,
+                email,
                 gender,
                 salary,
                 departmentId
@@ -42,6 +45,7 @@ const AdminDepartment = () => {
             setAge("");
             setName("");
             setDesignation("");
+            setEmail("")
             setGender("");
             setSalary("");
             setDepartmentId("");
@@ -65,6 +69,14 @@ const AdminDepartment = () => {
                                 value={name}
                                 onChange={(e) => setName(e.target.value)}
                                 placeholder='Name'
+                                className='md:h-16 rounded-lg p-4 outline-none text-white bg-base-300'
+                            />
+                            <input
+                                type="email"
+                                name='email'
+                                value={email}
+                                onChange={(e) => setEmail(e.target.value)}
+                                placeholder='Email'
                                 className='md:h-16 rounded-lg p-4 outline-none text-white bg-base-300'
                             />
                             <input
