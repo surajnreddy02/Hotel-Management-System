@@ -11,7 +11,7 @@ const AdminRooms = () => {
     const [loading, setLoading] = useState(false);
 
     const createRoom = async () => {
-        setLoading(true);
+        // setLoading(true);
         try {
             const formData = new FormData();
             formData.append('roomInfo', roomInfo);
@@ -39,10 +39,13 @@ const AdminRooms = () => {
         } catch (error) {
             setError(error.message);
             console.error('Error creating room:', error);
-        } finally {
-            setLoading(false);
         }
     };
+    if (loading) return (
+        <div className='h-screen flex items-center justify-center text-[100px]'>
+            <span className="loading loading-spinner text-error"></span>
+        </div>
+    );
 
     return (
         <section id='adminRoomsSection' className='mt-7 mb-20 md:ml-10 ml-2'>

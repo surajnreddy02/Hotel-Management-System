@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { useNavigate } from "react-router-dom"
+
 function Payment() {
     const [username, setUserName] = useState("");
     const [cardType, setCardType] = useState("");
@@ -9,6 +10,7 @@ function Payment() {
     const [year, setYear] = useState("");
     const [amount, setAmount] = useState(1000);
     const navigate = useNavigate();
+
     const handleSubmit = (e) => {
         e.preventDefault();
         
@@ -36,7 +38,7 @@ function Payment() {
                                     name="cardholderName"
                                     value={username}
                                     onChange={(e) => setUserName(e.target.value)}
-                                    className='h-10 rounded-lg font-italic p-3 w-full bg-gray-300 text-gray-800'
+                                    className='h-14 rounded-lg font-rubik p-3 w-full bg-base-300 text-white' // Updated classes here
                                     placeholder='Cardholder Name'
                                     required
                                 />
@@ -48,7 +50,7 @@ function Payment() {
                                     disabled
                                     value={amount}
                                     onChange={(e) => { setAmount(e.target.value) }}
-                                    className='h-10 rounded-lg font-italic p-3 w-full bg-gray-300 text-gray-800'
+                                    className='h-14 rounded-lg font-rubik p-3 w-full bg-base-300 text-white' // Keep disabled input style
                                     placeholder='Price'
                                     required
                                 />
@@ -58,7 +60,7 @@ function Payment() {
                                     name="cardType"
                                     value={cardType}
                                     onChange={(e) => setCardType(e.target.value)}
-                                    className='h-10 rounded-lg font-italic p-3 w-full bg-gray-300 text-gray-800'
+                                    className='h-14 rounded-lg font-rubik p-3 w-full bg-base-300 text-white'
                                     required
                                 >
                                     <option value="" disabled>Select Card Type</option>
@@ -74,7 +76,7 @@ function Payment() {
                                     name="cardNumber"
                                     value={cardNumber}
                                     onChange={(e) => setCardNumber(e.target.value)}
-                                    className='h-10 rounded-lg font-italic p-3 w-full bg-gray-300 text-gray-800'
+                                    className='h-14 rounded-lg font-rubik p-3 w-full bg-base-300 text-white'
                                     placeholder='Card Number'
                                     required
                                 />
@@ -84,7 +86,7 @@ function Payment() {
                                     name="month"
                                     value={month}
                                     onChange={(e) => setMonth(e.target.value)}
-                                    className='h-10 rounded-lg font-italic p-3 w-full bg-gray-300 text-gray-800'
+                                    className='h-14 rounded-lg font-rubik p-3 w-full bg-base-300 text-white'
                                     required
                                 >
                                     <option value="" disabled>Month</option>
@@ -105,7 +107,7 @@ function Payment() {
                                     name="year"
                                     value={year}
                                     onChange={(e) => setYear(e.target.value)}
-                                    className='h-10 rounded-lg font-italic p-3 w-full bg-gray-300 text-gray-800'
+                                    className='h-14 rounded-lg font-rubik p-3 w-full bg-base-300 text-white'
                                     required
                                 >
                                     <option value="" disabled>Year</option>
@@ -121,7 +123,7 @@ function Payment() {
                                     name="cvv"
                                     value={cvv}
                                     onChange={(e) => setCvv(e.target.value)}
-                                    className='h-10 rounded-lg font-italic p-3 w-full bg-gray-300 text-gray-800'
+                                    className='h-14 rounded-lg font-rubik p-3 w-full bg-base-300 text-white'
                                     placeholder='CVV'
                                     required
                                 />
@@ -129,8 +131,8 @@ function Payment() {
                             <div>
                                 <button
                                     type="submit"
-                                    className='h-10 rounded-lg text-white bg-blue-600 font-bold p-3 w-full hover:bg-blue-700 transition duration-300'
-                                    onClick={()=> navigate("/payment/success")}
+                                    className='h-14 rounded-lg text-white bg-blue-600 font-bold p-3 w-full hover:bg-blue-700 transition duration-300'
+                                    onClick={() => navigate("/payment/success")}
                                 >
                                     Submit Payment
                                 </button>

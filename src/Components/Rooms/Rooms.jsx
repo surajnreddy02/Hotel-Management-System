@@ -1,5 +1,6 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
+import axios from "axios"
 import Rating from './Rating';
 import img1 from '../../assets/images/carouselImages/img1.jpg';
 import img2 from '../../assets/images/carouselImages/img2.jpg';
@@ -13,34 +14,41 @@ import img8 from '../../assets/images/carouselImages/img8.jpg';
 const Rooms = () => {
 
     const navigate = useNavigate();
+    const [premiumRooms, setPremiumRooms] = useState([]);
+    const [presidentialRooms, setPresidentialRooms] = useState([]);
+    const [luxuryRooms, setLuxuryRooms] = useState([]);
+    const [loading, setLoading] = useState(true);
+    const [error, setError] = useState(null);
 
+    useEffect(() => {
+        const generateRooms = async () => {
+            try {
+                const presidentialResponse = await axios.get("http://localhost:5000/api/v1/rooms/get-presidential-rooms");
+                setPresidentialRooms(presidentialResponse.data.data);
 
-    const generateRoomCards = (count) => {
-        const cards = [];
-        for (let i = 0; i < count; i++) {
-            const img = [img1, img2, img3, img4, img5, img6, img7, img8];
-            cards.push(
-                <div key={i} className="roomCard w-72 h-96 rounded-lg bg-white p-3 flex-shrink-0 hover:scale-105 hover:bg-slate-100">
-                    <div className="img">
-                        <img src={img[i]} alt="Room" className="w-80 h-52 rounded-lg mt-2 mb-2" />
-                    </div>
-                    <div>
-                        <p className="text-cyan-900">1 Bedroom Suite, 1 King</p>
-                        <p className="text-cyan-900">&#8377; 1800 per night</p>
-                        {/* <p className="text-cyan-900 text-xl"><Rating /></p> */}
-                    </div>
-                    <div className="btn mt-3 w-full hover:bg-gray-700">
-                        <Link to={`/rooms/${i}`}
-                            // onClick={() => navigate(`/rooms/${i}`)}
-                            className="block p-3 w-full h-full">
-                            More Info
-                        </Link>
-                    </div>
-                </div>
-            );
-        }
-        return cards;
-    };
+                const premiumResponse = await axios.get("http://localhost:5000/api/v1/rooms/get-premium-rooms");
+                setPremiumRooms(premiumResponse.data.data);
+
+                const luxuryResponse = await axios.get("http://localhost:5000/api/v1/rooms/get-luxury-rooms");
+                setLuxuryRooms(luxuryResponse.data.data);
+            } catch (error) {
+                setError(error.message);
+            }
+        };
+
+        generateRooms();
+    }, []);
+
+    // console.log("presidential rooms ", premiumRooms)
+    // console.log("luxury rooms ", luxuryRooms)
+    // console.log("premium rooms ", premiumRooms)
+    const time = setTimeout(() => {
+        setLoading(false)
+    }, 900)
+    if (loading) return <div className='h-screen flex items-center justify-center text-[100px]'>
+        <span className="loading loading-spinner text-error"></span>
+    </div>
+
 
     return (
         <section id="rooms" className="mt-10 h-min mb-20">
@@ -73,7 +81,28 @@ const Rooms = () => {
                             Presidential or Executive Suites represent the pinnacle of luxury and sophistication. These suites are designed for discerning travelers who seek unparalleled comfort and privacy. Featuring opulent decor, private dining areas, and dedicated butler service, these suites cater to VIP guests and executives looking to host meetings or entertain guests in style.
                         </p>
                         <div className="roomCards ml-5 mt-10 flex flex-row gap-3 overflow-x-auto">
-                            {generateRoomCards(7)}
+                            {/* {generateRoomCards(7)} */}
+                            {
+                                presidentialRooms.map((room) => (
+                                    <div key={room._id} className="roomCard w-72 h-96 rounded-lg bg-white p-3 flex-shrink-0 hover:scale-105 hover:bg-slate-100">
+                                        <div className="img">
+                                            <img src={room.roomImage} alt="Room" className="w-80 h-52 rounded-lg mt-2 mb-2" />
+                                        </div>
+                                        <div>
+                                            <p className="text-cyan-900">{room.roomInfo}</p>
+                                            <p className="text-cyan-900">&#8377; {room.cost} per night</p>
+                                            {/* <p className="text-cyan-900 text-xl"><Rating /></p> */}
+                                        </div>
+                                        <div className="btn mt-3 w-full hover:bg-gray-700">
+                                            <Link to={`/rooms/${room._id}`}
+                                                // onClick={() => navigate(`/rooms/${i}`)}
+                                                className="block p-3 w-full h-full">
+                                                More Info
+                                            </Link>
+                                        </div>
+                                    </div>
+                                ))
+                            }
                         </div>
                         <div className="h-[1px] bg-cyan-950 m-5 ml-9 mr-9"></div>
                     </div>
@@ -86,7 +115,27 @@ const Rooms = () => {
                             Luxury suites are designed for travelers looking for an extraordinary experience. These suites offer expansive living spaces, separate bedrooms, and upscale amenities such as gourmet minibars and entertainment systems. Guests staying in luxury suites can indulge in personalized concierge services and exclusive access to premium facilities, ensuring a memorable and indulgent stay.
                         </p>
                         <div className="roomCards ml-5 mt-10 flex flex-row gap-3 overflow-x-auto">
-                            {generateRoomCards(7)}
+                            {
+                                luxuryRooms.map((room) => (
+                                    <div key={room._id} className="roomCard w-72 h-96 rounded-lg bg-white p-3 flex-shrink-0 hover:scale-105 hover:bg-slate-100">
+                                        <div className="img">
+                                            <img src={room.roomImage} alt="Room" className="w-80 h-52 rounded-lg mt-2 mb-2" />
+                                        </div>
+                                        <div>
+                                            <p className="text-cyan-900">{room.roomInfo}</p>
+                                            <p className="text-cyan-900">&#8377; {room.cost} per night</p>
+                                            {/* <p className="text-cyan-900 text-xl"><Rating /></p> */}
+                                        </div>
+                                        <div className="btn mt-3 w-full hover:bg-gray-700">
+                                            <Link to={`/rooms/${room._id}`}
+                                                // onClick={() => navigate(`/rooms/${i}`)}
+                                                className="block p-3 w-full h-full">
+                                                More Info
+                                            </Link>
+                                        </div>
+                                    </div>
+                                ))
+                            }
                         </div>
                         <div className="h-[1px] bg-cyan-950 m-5 ml-9 mr-9"></div>
                     </div>
@@ -99,7 +148,27 @@ const Rooms = () => {
                             Premium rooms cater to guests seeking a higher level of comfort and luxury. These rooms are characterized by elegant furnishings, luxurious bedding, and enhanced bathroom amenities. Guests can enjoy breathtaking views or premium location within the hotel, along with personalized services to enhance their stay.
                         </p>
                         <div className="roomCards ml-5 mt-10 flex flex-row gap-3 overflow-x-auto">
-                            {generateRoomCards(7)}
+                            {
+                                premiumRooms.map((room) => (
+                                    <div key={room._id} className="roomCard w-72 h-96 rounded-lg bg-white p-3 flex-shrink-0 hover:scale-105 hover:bg-slate-100">
+                                        <div className="img">
+                                            <img src={room.roomImage} alt="Room" className="w-80 h-52 rounded-lg mt-2 mb-2" />
+                                        </div>
+                                        <div>
+                                            <p className="text-cyan-900">{room.roomInfo}</p>
+                                            <p className="text-cyan-900">&#8377; {room.cost} per night</p>
+                                            {/* <p className="text-cyan-900 text-xl"><Rating /></p> */}
+                                        </div>
+                                        <div className="btn mt-3 w-full hover:bg-gray-700">
+                                            <Link to={`/rooms/${room._id}`}
+                                                // onClick={() => navigate(`/rooms/${i}`)}
+                                                className="block p-3 w-full h-full">
+                                                More Info
+                                            </Link>
+                                        </div>
+                                    </div>
+                                ))
+                            }
                         </div>
                         <div className="h-[1px] bg-cyan-950 m-5 ml-9 mr-9"></div>
                     </div>
