@@ -1,9 +1,9 @@
 import axios from "axios";
 import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import { login } from "../../store/AuthSlice.js"
+import { adminLogin } from "../../../store/AdminAuthSlice"
 import { useDispatch } from "react-redux";
-export default function SignUp() {
+export default function AdminSignUp() {
     const navigate = useNavigate();
     const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
@@ -18,7 +18,7 @@ export default function SignUp() {
         setError(null);
 
         try {
-            const response = await axios.post("http://localhost:5000/api/v1/users/register",
+            const response = await axios.post("http://localhost:5000/api/v1/admin/create-admin",
                 {
                     username,
                     email,
@@ -28,8 +28,8 @@ export default function SignUp() {
                     withCredentials: true
                 });
             console.log(response.data);
-            dispatch(login(response.data))
-            navigate("/dashboard");
+            dispatch(adminLogin(response.data))
+            navigate("/admin/dashboard");
 
         } catch (error) {
             setError(error.message);
@@ -119,7 +119,7 @@ export default function SignUp() {
 
                 <p className="mt-10 text-center text-sm text-gray-500">
                     Already have an account?{' '}
-                    <Link to="/login" className="font-semibold leading-6 text-indigo-600 hover:text-indigo-500">
+                    <Link to="/admin" className="font-semibold leading-6 text-indigo-600 hover:text-indigo-500">
                         Sign in
                     </Link>
                 </p>

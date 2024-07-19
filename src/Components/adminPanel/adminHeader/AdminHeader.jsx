@@ -1,8 +1,13 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import Header from '../../Header/Header';
-
+import { adminLogin, adminLogout } from "../../../store/AdminAuthSlice"
+import { useSelector } from 'react-redux';
+import { AdminLogout } from '../adminIndex'; 
 const AdminHeader = () => {
+
+    const adminAuthStatus = useSelector((state) => state.adminAuth.isAuthenticated);
+
     return (
         <header>
             <div>
@@ -43,7 +48,12 @@ const AdminHeader = () => {
                     </ul>
                 </div>
                 <div className="navbar-end">
-                    <Link to="/admin/button" className="btn">logout</Link>
+                    {!adminAuthStatus ? (
+                        <Link to="/admin" className="btn">Login</Link>
+                    ) : (
+                        <AdminLogout />
+                    )}
+                    {/* <AdminLogout /> */}
                 </div>
             </div>
         </header>

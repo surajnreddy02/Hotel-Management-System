@@ -12,7 +12,7 @@ import { Provider } from "react-redux";
 
 // importing components
 import { Dashboard, Contact, Rooms, Services, RoomsInfo, Reviews, Login, Signup, Payment, Logout, Success, Failure } from './index';
-import { AdminDashboard, AdminDepartment, AdminEmployee, AdminRooms, AdminHeader } from "./Components/adminPanel/adminIndex"
+import { AdminDashboard, AdminDepartment, AdminEmployee, AdminRooms, AdminHeader, AdminLogin, AdminLogout, AdminSignUp } from "./Components/adminPanel/adminIndex"
 
 const route = createBrowserRouter(
   createRoutesFromElements(
@@ -22,7 +22,7 @@ const route = createBrowserRouter(
         <Route path="login" element={<Login />} />
         <Route path="signup" element={<Signup />} />
         {/* <Route path="logout" element={<Logout />} /> */}
-        <Route path="/dashboard" element={<Dashboard />} />
+        <Route path="dashboard" element={<Dashboard />} />
         <Route path='contact' element={<Contact />} />
         <Route path='rooms' element={<Rooms />} />
         <Route path='rooms/:roomId' element={<RoomsInfo />} />
@@ -35,6 +35,10 @@ const route = createBrowserRouter(
       {/* USER ROUTES OVER--------------------------> */}
       {/* The admin routes are from here */}
       <Route path='/admin' element={<AdminLayout />}>
+        <Route index element={<AdminLogin />} />
+        {/* <Route path="adminLogin" element={<AdminLogin />} /> */}
+        <Route path="adminSignup" element={<AdminSignUp />} />
+        <Route path="adminLogout" element={<AdminLogout />} />
         <Route path="dashboard" element={<AdminDashboard />} />
         <Route path="rooms" element={<AdminRooms />} />
         <Route path="departments" element={<AdminDepartment />} />

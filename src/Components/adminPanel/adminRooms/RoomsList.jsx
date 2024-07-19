@@ -9,8 +9,10 @@ const RoomsList = () => {
         const fetchRoom = async () => {
             setLoading(true)
             try {
-                const response = await axios.get("http://localhost:5000/api/v1/rooms/get-rooms")
-                // console.log(response.data.data)
+                const response = await axios.get("http://localhost:5000/api/v1/rooms/get-all-rooms", {
+                    withCredentials: true
+                })
+                console.log(response.data.data)
                 setRooms(response.data.data)
             } catch (error) {
                 setError(error.message);
@@ -44,7 +46,7 @@ const RoomsList = () => {
                         </tr>
                     </thead>
                     <tbody>
-                        {loading? ( <h1 className='text-3xl font-bold text-center mt-10'>Loading.....</h1>):(rooms.map((room, index) => (
+                        {loading ? (<h1 className='text-3xl font-bold text-center mt-10'>Loading.....</h1>) : (rooms.map((room, index) => (
                             <tr className='text-gray-800'>
                                 <th>{index + 1}</th>
                                 <td>{room._id}</td>

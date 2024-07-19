@@ -4,10 +4,33 @@ import { Link, useNavigate } from "react-router-dom";
 import successGif from "../../assets/Success/paymetSuccess.gif";
 import { TiTick } from "react-icons/ti";
 import { FaRupeeSign } from "react-icons/fa";
+import axios from 'axios';
 
 const Success = () => {
     const [loading, setLoading] = useState(true);
+    const [paymentInfo, setPaymentInfo] = useState({});
+    const [error, setError] = useState(null)
+    const [cost,setCost] = useState('');
     const navigate = useNavigate();
+
+    useEffect(() => {
+        const getPaymentInfo = async () => {
+            try {
+                const response = await axios.get("http://localhost:5000/api/v1/payment/paymentInfo", {
+                    withCredentials: true
+                });
+                console.log("the payment info is : ",response.data.data.payment)
+                console.log("the cast info is : ",response.data.data.cost)
+                setPaymentInfo(response.data.data.payment);
+                setCost(response.data.data.cost)
+            } catch (error) {
+                console.error("Error fetching payment info:", error);
+                setError(error.message)
+            }
+        };
+
+        getPaymentInfo();
+    }, []);
 
     useEffect(() => {
         const timer = setTimeout(() => {
@@ -15,12 +38,17 @@ const Success = () => {
         }, 3000);
 
         return () => clearTimeout(timer);
-        //NOTE: in react it is mandatory to return clearTimeOut so keep in mind
-        // In React, it's important to handle cleanup for side effects such as timers, subscriptions, or any asynchronous tasks initiated inside components to avoid memory leaks and unexpected behavior. 
     }, []);
 
+    if (loading) {
+        return (<div className='flex justify-center items-center h-screen text-5xl text-center text-gray-800'>Loading.....</div>);
+    }
+    if (error) {
+        return (<p className='flex justify-center h-screen items-center text-5xl text-center text-red-700'>{error}</p>);
+    }
+
     return (
-        <section className='h-screen lg:ml-16 ml-1 mt-20 bg-slate-100 overflow-x-hidden'>
+        <section className='h-screen lg:ml-16 ml-1 mt-20 bg-slate-100 overflow-x-hidden mb-20'>
             <div id='mainDiv' className='flex lg:flex-row flex-col-reverse lg:gap-0 gap-10 '>
                 <div id="left" className='flex flex-col lg:w-1/2 w-screen ml-4'>
                     <div className="logo">
@@ -38,62 +66,58 @@ const Success = () => {
                     </div>
                 </div>
                 <div id="rights" className='lg:w-1/2 lg:mr-10 flex gap-5 flex-col'>
-                    {loading ? (
-                        <div className="flex justify-center items-center w-full h-full">
-                            <p className="text-3xl font-bold text-black">Loading...</p>
+                    <div id="amount">
+                        <div className='bg-white p-5 h-32 lg:w-[500px] w-screen flex items-center justify-between rounded-lg'>
+                            <div id='amountInfo' className=''>
+                                <div className='flex flex-row items-center justify-center gap-2'>
+                                    <p className='text-3xl font-bold text-black font-rubik'><FaRupeeSign /></p>
+                                    <h1 className='text-3xl font-bold text-black font-rubik'>{cost}</h1>
+                                </div>
+                                <p className='text-gray-500 text-xs'>Payment Success...!</p>
+                            </div>
+                            <div id='successGif'>
+                                <img
+                                    className='w-28'
+                                    src={successGif}
+                                    alt="Success GIF" />
+                            </div>
                         </div>
-                    ) : (
-                        <>
-                            <div id="amount">
-                                <div className='bg-white p-5 h-32 lg:w-[500px] w-screen flex items-center justify-between rounded-lg'>
-                                    <div id='amountInfo' className=''>
-                                        <div className='flex flex-row items-center justify-center gap-2'>
-                                            <p className='text-3xl font-bold text-black font-rubik'><FaRupeeSign /></p>
-                                            <h1 className='text-3xl font-bold text-black font-rubik'>5400</h1>
-                                        </div>
-                                        <p className='text-gray-500 text-xs'>Payment Success...!</p>
-                                    </div>
-                                    <div id='successGif'>
-                                        <img
-                                            className='w-28'
-                                            src={successGif}
-                                            alt="Success GIF" />
-                                    </div>
+                    </div>
+                    <div id="paymentDetails" className='bg-white p-5 h-auto lg:w-[500px] w-screen rounded-lg'>
+                        <h1 className='text-[18px] text-black font-rubik font-semibold'>Payment details</h1>
+                        <div id="paymentInfo" className='mt-5 flex flex-col gap-6 text-xs'>
+                            <div id="date" className='flex flex-row justify-between'>
+                                <p className='text-gray-500 text-xs'>Date</p>
+                                <p className='text-black font-bold'>{paymentInfo.createdAt}</p>
+                            </div>
+                            <div id="allocatedRoom" className='flex flex-row justify-between'>
+                                <p className='text-gray-500 text-xs'>Allocated Room</p>
+                                <p className='text-black font-bold'>{paymentInfo.roomId}</p>
+                            </div>
+                            <div id="refNo" className='flex flex-row justify-between'>
+                                <p className='text-gray-500 text-xs'>Reference Number</p>
+                                <p className='text-black font-bold'>{paymentInfo._id}</p>
+                            </div>
+                            <div id="amount" className='flex flex-row justify-between'>
+                                <p className='text-gray-500 text-xs'>Amount</p>
+                                <div className='flex flex-row items-center justify-center gap-2 text-black font-bold'>
+                                    <span><FaRupeeSign /></span>
+                                    <p>{cost}</p>
                                 </div>
                             </div>
-                            <div id="paymentDetails" className='bg-white p-5 h-auto lg:w-[500px] w-screen rounded-lg'>
-                                <h1 className='text-[18px] text-black font-rubik font-semibold'>Payment details</h1>
-                                <div id="paymentInfo" className='mt-5 flex flex-col gap-6 text-xs'>
-                                    <div id="date" className='flex flex-row justify-between'>
-                                        <p className='text-gray-500 text-xs'>Date</p>
-                                        <p className='text-black font-bold'>12/07/2004</p>
-                                    </div>
-                                    <div id="refNo" className='flex flex-row justify-between'>
-                                        <p className='text-gray-500 text-xs'>Reference Number</p>
-                                        <p className='text-black font-bold'>123456789</p>
-                                    </div>
-                                    <div id="amount" className='flex flex-row justify-between'>
-                                        <p className='text-gray-500 text-xs'>Amount</p>
-                                        <div className='flex flex-row items-center justify-center gap-2 text-black font-bold'>
-                                            <span><FaRupeeSign /></span>
-                                            <p>5000</p>
-                                        </div>
-                                    </div>
-                                    <div id="paymentMethod" className='flex flex-row justify-between'>
-                                        <p className='text-gray-500 text-xs'>Payment Method</p>
-                                        <p className='text-black text-xs font-bold'>Credit-card</p>
-                                    </div>
-                                    <div id="paymentStatus" className='flex flex-row justify-between'>
-                                        <p className='text-gray-500 text-xs'>Payment Status</p>
-                                        <div className='flex flex-row items-center justify-center gap-2 text-black font-bold'>
-                                            <p>Success</p>
-                                            <span><TiTick /></span>
-                                        </div>
-                                    </div>
+                            <div id="paymentMethod" className='flex flex-row justify-between'>
+                                <p className='text-gray-500 text-xs'>Payment Method</p>
+                                <p className='text-black text-xs font-bold'>{paymentInfo.cardType}</p>
+                            </div>
+                            <div id="paymentStatus" className='flex flex-row justify-between'>
+                                <p className='text-gray-500 text-xs'>Payment Status</p>
+                                <div className='flex flex-row items-center justify-center gap-2 text-black font-bold'>
+                                    <p>Success</p>
+                                    <span><TiTick /></span>
                                 </div>
                             </div>
-                        </>
-                    )}
+                        </div>
+                    </div>
                 </div>
             </div>
         </section>

@@ -2,6 +2,8 @@ import React, { useState, useEffect } from 'react';
 import { Link } from "react-router-dom";
 import { DepartmentList } from "../adminIndex";
 import axios from 'axios';
+import { useNavigate } from 'react-router-dom';
+import { useSelector } from 'react-redux';
 
 
 const AdminDepartment = () => {
@@ -19,7 +21,9 @@ const AdminDepartment = () => {
     useEffect(() => {
         const fetchDepartments = async () => {
             try {
-                const response = await axios.get("http://localhost:5000/api/v1/department/departments");
+                const response = await axios.get("http://localhost:5000/api/v1/department/departments",{
+                    withCredentials:true,
+                });
                 setDepartments(response.data.data.departments);
             } catch (error) {
                 console.error("Error fetching departments:", error);
@@ -40,6 +44,8 @@ const AdminDepartment = () => {
                 gender,
                 salary,
                 departmentId
+            },{
+                withCredentials:true
             });
             console.log("Employee added:", response.data);
             setAge("");
@@ -55,6 +61,16 @@ const AdminDepartment = () => {
             setLoading(false)
         }
     };
+
+    const navigate = useNavigate();
+    const authStatus = useSelector((state => state.adminAuth.isAuthenticated))
+
+    if (!authStatus) {
+        navigate("/admin")
+        return <section className='h-screen'>
+            <h1 className='mt-10 text-center text-black text-3xl'>Please Login First</h1>
+        </section>;
+    }
 
     return (
         <section id='EmployeeFormSection' className='mt-7 mb-20 md:ml-10 ml-2'>

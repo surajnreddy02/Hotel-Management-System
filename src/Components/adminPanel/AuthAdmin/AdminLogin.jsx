@@ -1,10 +1,10 @@
 import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import { login } from "../../store/AuthSlice";
+import { adminLogin } from "../../../store/AdminAuthSlice";
 import { useDispatch } from "react-redux";
 import axios from "axios";
 
-export default function Login() {
+export default function AdminLogin() {
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
     const [error, setError] = useState(null);
@@ -15,10 +15,9 @@ export default function Login() {
     const handleSubmit = async (e) => {
         e.preventDefault();
         setLoading(true);
-        setError(null);
 
         try {
-            const response = await axios.post("http://localhost:5000/api/v1/users/login", {
+            const response = await axios.post("http://localhost:5000/api/v1/admin/login", {
                 email,
                 password,
             }, {
@@ -26,12 +25,11 @@ export default function Login() {
             });
 
             console.log("Login successful", response.data);
-            dispatch(login(response.data));
-            navigate("/dashboard");
+            dispatch(adminLogin(response.data));
+            navigate("/admin/dashboard");
         } catch (error) {
-            const errorMsg = error.response?.data?.message || "Network error, please try again later.";
-            setError(errorMsg);
-            console.error("Error signing in:", errorMsg);
+            setError(error.message);
+            console.error("Error signing in:", error.message);
         } finally {
             setLoading(false);
         }
@@ -105,7 +103,7 @@ export default function Login() {
                 <p className="mt-10 text-center text-sm text-gray-500">
                     Don't have an account?{" "}
                     <Link
-                        to="/signup"
+                        to="/admin/adminSignup"
                         className="font-semibold leading-6 text-indigo-600 hover:text-indigo-500"
                     >
                         Sign up

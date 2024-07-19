@@ -8,9 +8,10 @@ const Services = () => {
         <section id="services" className='mt-10 mb-20 h-min overflow-x-hidden'>
             <div id="main" className=''>
                 <div id='heading' className='flex flex-col items-center mb-10 ml-5'>
-                    <h1 className='text-3xl font-italic text-cyan-950 text-center font-semibold mb-4'>Discover India’s Past and Present Near This 5-Star Bangalore Hotel</h1>
-                    <h1 className='text-3xl text-center font-italic underline text-cyan-950 mb-5'>EXPERIENCES</h1>
-                    <p className='text-[16px] font-italic w-4/5 text-center text-cyan-950'>Home to Manyata Tech Park, Embassy GolfLinks Business Park and UB City, Bangalore is known as India’s Silicon Valley. But it also has another name: Garden City. Bangalore has lush parks like Cubbon Park and beautiful gardens framing palaces, art museums and theaters. Our 5-star hotel near Chowdiah Memorial Hall and Visvesvaraya Industrial and Technological Museum offers the ideal destination for discovery</p>
+                    <h1 className='text-3xl font-rubik text-cyan-950 text-center font-semibold mb-4'>Discover India’s Past and Present Near This 5-Star Bangalore Hotel</h1>
+                    <h1 className='text-3xl text-center
+                     font-rubik underline text-cyan-950 mb-5'>EXPERIENCES</h1>
+                    <p className='text-[16px] font-rubik w-4/5 text-center text-cyan-950'>Home to Manyata Tech Park, Embassy GolfLinks Business Park and UB City, Bangalore is known as India’s Silicon Valley. But it also has another name: Garden City. Bangalore has lush parks like Cubbon Park and beautiful gardens framing palaces, art museums and theaters. Our 5-star hotel near Chowdiah Memorial Hall and Visvesvaraya Industrial and Technological Museum offers the ideal destination for discovery</p>
                 </div>
                 <div id="services" className='bg-slate-400 rounded-lg'>
                     <div id="serviceCards" className='md:ml-5 ml-0 p-10 flex flex-col gap-14'>
@@ -68,7 +69,7 @@ const Services = () => {
                                         </ul>
                                     </div>
                                 </div>
-                                
+
                             </div>
                         </div>
                     </div>

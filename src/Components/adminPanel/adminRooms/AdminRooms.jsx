@@ -1,6 +1,8 @@
 import React, { useState } from 'react';
 import axios from 'axios';
 import { RoomsList } from '../adminIndex'; // Assuming RoomsList is exported from adminIndex
+import { useNavigate } from "react-router-dom"
+import { useSelector } from "react-redux"
 
 const AdminRooms = () => {
     const [roomInfo, setRoomInfo] = useState('');
@@ -9,6 +11,7 @@ const AdminRooms = () => {
     const [file, setFile] = useState(null);
     const [error, setError] = useState(null);
     const [loading, setLoading] = useState(false);
+
 
     const createRoom = async () => {
         // setLoading(true);
@@ -27,7 +30,8 @@ const AdminRooms = () => {
             const response = await axios.post('http://localhost:5000/api/v1/rooms/create-room', formData, {
                 headers: {
                     'Content-Type': 'multipart/form-data'
-                }
+                },
+                withCredentials:true
             });
 
             console.log("the response is >>>>>", response.data);
@@ -46,6 +50,17 @@ const AdminRooms = () => {
             <span className="loading loading-spinner text-error"></span>
         </div>
     );
+
+    const navigate = useNavigate();
+    const authStatus = useSelector((state => state.adminAuth.isAuthenticated))
+
+    if (!authStatus) {
+        navigate("/admin")
+        return <section className='h-screen'>
+            <h1 className='mt-10 text-center text-black text-3xl'>Please Login First</h1>
+        </section>;
+    }
+
 
     return (
         <section id='adminRoomsSection' className='mt-7 mb-20 md:ml-10 ml-2'>

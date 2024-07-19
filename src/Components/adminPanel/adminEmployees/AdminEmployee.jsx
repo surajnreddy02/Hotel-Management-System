@@ -13,7 +13,9 @@ const AdminEmployee = () => {
       setLoading(true);
       try {
         console.log(`Fetching employees for department ID: ${deptId}`);
-        const response = await axios.get(`http://localhost:5000/api/v1/employee/get-all-employees/${deptId}`);
+        const response = await axios.get(`http://localhost:5000/api/v1/employee/get-all-employees/${deptId}`, {
+          withCredentials: true
+        });
         console.log(response.data.data);
         setEmployees(response.data.data); // Set the response data to the employees state
       } catch (error) {

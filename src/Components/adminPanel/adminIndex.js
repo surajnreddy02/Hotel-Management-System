@@ -6,6 +6,10 @@ import AdminRooms from "./adminRooms/AdminRooms";
 import AdminFooter from "./adminFooter/AdminFooter";
 import RoomsList from "./adminRooms/RoomsList";
 import DepartmentList from "./adminDepartment/DepartmentList"
+import Login from "./AuthAdmin/AdminLogin";
+import AdminLogin from "./AuthAdmin/AdminLogin";
+import AdminLogout from "./AuthAdmin/AdminLogout"
+import AdminSignUp from "./AuthAdmin/AdminSignup";
 
 export {
     AdminHeader,
@@ -15,5 +19,8 @@ export {
     AdminRooms,
     AdminFooter,
     RoomsList,
-    DepartmentList
+    DepartmentList,
+    AdminLogin,
+    AdminLogout,
+    AdminSignUp
 }

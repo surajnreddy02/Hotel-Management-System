@@ -1,4 +1,5 @@
-import React, { useState } from 'react';
+import axios from 'axios';
+import React, { useEffect, useState } from 'react';
 import { useNavigate } from "react-router-dom"
 
 function Payment() {
@@ -11,18 +12,52 @@ function Payment() {
     const [amount, setAmount] = useState(1000);
     const navigate = useNavigate();
 
-    const handleSubmit = (e) => {
+    const [loading, setLoading] = useState(false)
+    const [error, setError] = useState(null)
+
+    // useEffect(() => {
+    //     const getPaymentInfo = async () => {
+    //         setLoading(true)
+    //         try {
+    //             const response = await axios.get("http://localhost:5000/api/v1/payment/user-payment", {
+    //                 withCredentials: true
+    //             })
+    //             const { userData, roomData } = (response.data.data)
+    //             setUserName(userData.username)
+    //             setAmount(roomInfo.cost)
+    //         } catch (error) {
+    //             setError(error.message);
+    //         } finally {
+    //             setLoading(false)
+    //         }
+    //     }
+    //     getPaymentInfo()
+    // }, [])
+
+
+    const handleSubmit = async (e) => {
         e.preventDefault();
-        
-        console.log('Form submitted', {
-            username,
-            cardType,
-            cardNumber,
-            cvv,
-            month,
-            year,
-            amount
-        });
+        try {
+            const payment = await axios.post("http://localhost:5000/api/v1/payment/pay", {
+                username,
+                cost: amount,
+                cardType,
+                cardNumber,
+                cardCvv: cvv,
+                month,
+                year,
+
+            }, {
+                withCredentials: true
+            })
+            console.log(payment)
+            navigate("/payment/success")
+
+        } catch (error) {
+            setError(error)
+        }
+
+
     };
 
     return (
@@ -47,7 +82,7 @@ function Payment() {
                                 <input
                                     type="number"
                                     name="price"
-                                    disabled
+                                    // disabled
                                     value={amount}
                                     onChange={(e) => { setAmount(e.target.value) }}
                                     className='h-14 rounded-lg font-rubik p-3 w-full bg-base-300 text-white' // Keep disabled input style
@@ -132,7 +167,7 @@ function Payment() {
                                 <button
                                     type="submit"
                                     className='h-14 rounded-lg text-white bg-blue-600 font-bold p-3 w-full hover:bg-blue-700 transition duration-300'
-                                    onClick={() => navigate("/payment/success")}
+                                    // onClick={() => navigate("/payment/success")}
                                 >
                                     Submit Payment
                                 </button>

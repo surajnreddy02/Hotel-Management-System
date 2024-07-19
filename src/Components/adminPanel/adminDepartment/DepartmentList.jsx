@@ -11,7 +11,9 @@ const DepartmentList = () => {
         const getDepartments = async () => {
             setLoading(true);
             try {
-                const response = await axios.get("http://localhost:5000/api/v1/department/departments");
+                const response = await axios.get("http://localhost:5000/api/v1/department/departments", {
+                    withCredentials: true
+                });
                 const { departments, employeeCount } = response.data.data;
 
                 const combinedData = departments.map(dept => {
