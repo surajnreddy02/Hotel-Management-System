@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import axios from 'axios';
-import { RoomsList } from '../adminIndex'; // Assuming RoomsList is exported from adminIndex
+import { AllocatedRoomList, RoomsList, UnAllocatedRooms } from '../adminIndex'; // Assuming RoomsList is exported from adminIndex
 import { useNavigate } from "react-router-dom"
 import { useSelector } from "react-redux"
 
@@ -31,7 +31,7 @@ const AdminRooms = () => {
                 headers: {
                     'Content-Type': 'multipart/form-data'
                 },
-                withCredentials:true
+                withCredentials: true
             });
 
             console.log("the response is >>>>>", response.data);
@@ -63,7 +63,7 @@ const AdminRooms = () => {
 
 
     return (
-        <section id='adminRoomsSection' className='mt-7 mb-20 md:ml-10 ml-2'>
+        <section id='adminRoomsSection' className='mt-7 mb-20 md:ml-10 ml-2 h-min'>
             <div id="mainDiv" className='flex items-center md:justify-around justify-center md:flex-row flex-col-reverse'>
                 <div id="roomForm" className='mt-10 md:w-1/3 w-4/5'>
                     <div>
@@ -111,8 +111,25 @@ const AdminRooms = () => {
                         </div>
                     </div>
                 </div>
-                <div className='h-96'>
-                    <RoomsList />
+                <div className='overflow-x-auto'>
+                    <h1 className='text-2xl text-cyan-950 text-center font-italic underline font-bold mb-4'>Rooms List</h1>
+                    <div className='h-96'>
+                        <RoomsList />
+                    </div>
+                </div>
+            </div>
+            <div id="allocationInfo" className='flex mt-20 justify-around  flex-col '>
+                <div  className='mb-10'>
+                    <h1 className='text-2xl text-cyan-950 w-4/5 text-center font-italic underline font-bold mb-4'>Unallocated Rooms</h1>
+                    <div className='lg:h-[400px] max-h-96 overflow-auto'>
+                        <UnAllocatedRooms />
+                    </div>
+                </div>
+                <div className='mb-10'>
+                    <h1 className='text-2xl text-cyan-950 text-center font-italic underline font-bold mb-4'>Allocated Rooms</h1>
+                    <div className='lg:h-[400px] max-h-96  overflow-auto mb-5'>
+                        <AllocatedRoomList />
+                    </div>
                 </div>
             </div>
         </section>

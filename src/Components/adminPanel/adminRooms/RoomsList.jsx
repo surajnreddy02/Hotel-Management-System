@@ -33,7 +33,7 @@ const RoomsList = () => {
 
 
         <div div id="roomsList" className='mt-10 h-4/5 overflow-auto' >
-            <h2 className='text-3xl text-center text-cyan-950 font-italic font-bold underline mb-3'>Rooms List</h2>
+            {/* <h2 className='text-3xl text-center text-cyan-950 font-italic font-bold underline mb-3'>Rooms List</h2> */}
             <div className="overflow-x-auto">
                 <table className="table">
                     {/* head */}
@@ -51,7 +51,7 @@ const RoomsList = () => {
                                 <th>{index + 1}</th>
                                 <td>{room._id}</td>
                                 <td>{room.roomType}</td>
-                                <td>${room.cost}</td>
+                                <td>&#8377;{room.cost}</td>
                             </tr>
                         )))}
 

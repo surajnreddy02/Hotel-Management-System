@@ -10,6 +10,8 @@ import Login from "./AuthAdmin/AdminLogin";
 import AdminLogin from "./AuthAdmin/AdminLogin";
 import AdminLogout from "./AuthAdmin/AdminLogout"
 import AdminSignUp from "./AuthAdmin/AdminSignup";
+import AllocatedRoomList from "./adminRooms/AllocatedRoomList";
+import UnAllocatedRooms from "./adminRooms/UnAllocatedRooms";
 
 export {
     AdminHeader,
@@ -22,5 +24,7 @@ export {
     DepartmentList,
     AdminLogin,
     AdminLogout,
-    AdminSignUp
+    AdminSignUp,
+    AllocatedRoomList,
+    UnAllocatedRooms
 }
