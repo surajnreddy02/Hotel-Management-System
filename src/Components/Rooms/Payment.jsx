@@ -1,6 +1,6 @@
 import axios from 'axios';
 import React, { useEffect, useState } from 'react';
-import { useNavigate } from "react-router-dom"
+import { useNavigate } from "react-router-dom";
 
 function Payment() {
     const [username, setUserName] = useState("");
@@ -9,34 +9,37 @@ function Payment() {
     const [cvv, setCvv] = useState("");
     const [month, setMonth] = useState("");
     const [year, setYear] = useState("");
-    const [amount, setAmount] = useState(1000);
+    const [amount, setAmount] = useState(0); // Initialize amount state
     const navigate = useNavigate();
 
-    const [loading, setLoading] = useState(false)
-    const [error, setError] = useState(null)
+    const [loading, setLoading] = useState(false);
+    const [error, setError] = useState(null);
 
-    // useEffect(() => {
-    //     const getPaymentInfo = async () => {
-    //         setLoading(true)
-    //         try {
-    //             const response = await axios.get("http://localhost:5000/api/v1/payment/user-payment", {
-    //                 withCredentials: true
-    //             })
-    //             const { userData, roomData } = (response.data.data)
-    //             setUserName(userData.username)
-    //             setAmount(roomInfo.cost)
-    //         } catch (error) {
-    //             setError(error.message);
-    //         } finally {
-    //             setLoading(false)
-    //         }
-    //     }
-    //     getPaymentInfo()
-    // }, [])
+    useEffect(() => {
+        const getAmountInfo = async () => {
+            try {
+                const response = await axios.get("http://localhost:5000/api/v1/payment/amountInfo", {
+                    withCredentials: true,
+                });
+                console.log("The data is ", response.data.data);
 
+                // Assuming that data is an array and you want the first item
+                if (response.data.data.length > 0) {
+                    const roomInfo = response.data.data[0].roomInfo;
+                    if (roomInfo) {
+                        setAmount(roomInfo.cost); // Set the amount from roomInfo
+                    }
+                }
+            } catch (error) {
+                setError(error.response ? error.response.data.message : error.message);
+            }
+        };
+        getAmountInfo();
+    }, []);
 
     const handleSubmit = async (e) => {
         e.preventDefault();
+        setLoading(true);
         try {
             const payment = await axios.post("http://localhost:5000/api/v1/payment/pay", {
                 username,
@@ -46,18 +49,16 @@ function Payment() {
                 cardCvv: cvv,
                 month,
                 year,
-
             }, {
                 withCredentials: true
-            })
-            console.log(payment)
-            navigate("/payment/success")
-
+            });
+            console.log(payment);
+            navigate("/payment/success");
         } catch (error) {
-            setError(error)
+            setError(error.response ? error.response.data.message : error.message);
+        } finally {
+            setLoading(false);
         }
-
-
     };
 
     return (
@@ -73,19 +74,18 @@ function Payment() {
                                     name="cardholderName"
                                     value={username}
                                     onChange={(e) => setUserName(e.target.value)}
-                                    className='h-14 rounded-lg font-rubik p-3 w-full bg-base-300 text-white' // Updated classes here
+                                    className='h-14 rounded-lg font-rubik p-3 w-full bg-base-300 text-white'
                                     placeholder='Cardholder Name'
                                     required
                                 />
                             </div>
                             <div>
                                 <input
-                                    type="number"
-                                    name="price"
-                                    // disabled
+                                    type="text"
+                                    name="cost"
                                     value={amount}
-                                    onChange={(e) => { setAmount(e.target.value) }}
-                                    className='h-14 rounded-lg font-rubik p-3 w-full bg-base-300 text-white' // Keep disabled input style
+                                    readOnly
+                                    className='h-14 rounded-lg font-rubik p-3 w-full bg-base-300 text-white'
                                     placeholder='Price'
                                     required
                                 />
@@ -107,13 +107,14 @@ function Payment() {
                             </div>
                             <div>
                                 <input
-                                    type="number"
+                                    type="text"
                                     name="cardNumber"
                                     value={cardNumber}
                                     onChange={(e) => setCardNumber(e.target.value)}
                                     className='h-14 rounded-lg font-rubik p-3 w-full bg-base-300 text-white'
                                     placeholder='Card Number'
                                     required
+                                    inputMode="numeric"
                                 />
                             </div>
                             <div className='flex gap-4'>
@@ -125,18 +126,11 @@ function Payment() {
                                     required
                                 >
                                     <option value="" disabled>Month</option>
-                                    <option value="01">January</option>
-                                    <option value="02">February</option>
-                                    <option value="03">March</option>
-                                    <option value="04">April</option>
-                                    <option value="05">May</option>
-                                    <option value="06">June</option>
-                                    <option value="07">July</option>
-                                    <option value="08">August</option>
-                                    <option value="09">September</option>
-                                    <option value="10">October</option>
-                                    <option value="11">November</option>
-                                    <option value="12">December</option>
+                                    {[...Array(12)].map((_, index) => (
+                                        <option key={index + 1} value={String(index + 1).padStart(2, '0')}>
+                                            {new Date(0, index).toLocaleString('default', { month: 'long' })}
+                                        </option>
+                                    ))}
                                 </select>
                                 <select
                                     name="year"
@@ -155,21 +149,22 @@ function Payment() {
                             <div>
                                 <input
                                     type="text"
-                                    name="cvv"
+                                    name="cardCvv"
                                     value={cvv}
                                     onChange={(e) => setCvv(e.target.value)}
                                     className='h-14 rounded-lg font-rubik p-3 w-full bg-base-300 text-white'
                                     placeholder='CVV'
                                     required
+                                    inputMode="numeric"
                                 />
                             </div>
                             <div>
                                 <button
                                     type="submit"
                                     className='h-14 rounded-lg text-white bg-blue-600 font-bold p-3 w-full hover:bg-blue-700 transition duration-300'
-                                    // onClick={() => navigate("/payment/success")}
+                                    disabled={loading}
                                 >
-                                    Submit Payment
+                                    {loading ? "Processing..." : "Submit Payment"}
                                 </button>
                             </div>
                         </div>

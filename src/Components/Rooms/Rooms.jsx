@@ -19,10 +19,15 @@ const Rooms = () => {
     const [luxuryRooms, setLuxuryRooms] = useState([]);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
+    const [allocatedRooms, setAllocatedRooms] = useState([]);
 
     useEffect(() => {
         const generateRooms = async () => {
             try {
+                const allocatedRooms = await axios.get("http://localhost:5000/api/v1/rooms/get-allocated-rooms");
+                setAllocatedRooms(allocatedRooms.data.data)
+
+
                 const presidentialResponse = await axios.get("http://localhost:5000/api/v1/rooms/get-presidential-rooms");
                 setPresidentialRooms(presidentialResponse.data.data);
 

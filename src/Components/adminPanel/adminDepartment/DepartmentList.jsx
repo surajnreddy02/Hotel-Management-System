@@ -20,7 +20,7 @@ const DepartmentList = () => {
                     const countInfo = employeeCount.find(count => count.departmentName === dept.departmentName);
                     return {
                         ...dept,
-                        totalEmp: countInfo ? countInfo.totalEmp : 0 // Default to 0 if not found
+                        totalEmp: countInfo ? countInfo.totalEmp : 0 
                     };
                 });
 
