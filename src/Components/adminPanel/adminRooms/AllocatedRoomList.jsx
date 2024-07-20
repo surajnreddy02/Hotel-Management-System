@@ -29,6 +29,7 @@ const AllocatedRoomList = () => {
             }, {
                 withCredentials: true
             })
+            setRoomInfo((prevInfo)=> prevInfo.filter((room)=> room._id !== roomId))
             console.log(response.data.data)
         } catch (error) {
             setError(error.message)
@@ -68,7 +69,7 @@ const AllocatedRoomList = () => {
                             <tbody>
                                 {
                                     roomInfo.map((room, index) => (
-                                        <tr>
+                                        <tr key={index + 1}>
                                             <th>{index + 1}</th>
                                             <td>{room._id}</td>
                                             <td>{room.roomType}</td>

@@ -16,6 +16,7 @@ const AdminEmployee = () => {
         const response = await axios.get(`http://localhost:5000/api/v1/employee/get-all-employees/${deptId}`, {
           withCredentials: true
         });
+
         console.log(response.data.data);
         setEmployees(response.data.data); // Set the response data to the employees state
       } catch (error) {
@@ -27,7 +28,21 @@ const AdminEmployee = () => {
     };
 
     getEmployees();
-  }, [deptId]); // Add deptId as a dependency
+  }, [deptId]);
+
+  const handleDelete = async (employeeId) => {
+    try {
+      const response = await axios.post("http://localhost:5000/api/v1/employee/remove-employee", {
+        employeeId
+      }, {
+        withCredentials: true
+      })
+      setEmployees((prevEmployee) => prevEmployee.filter((employee) => employee._id !== employeeId))
+    } catch (error) {
+      setError(error)
+    }
+  }
+
 
   return (
     <section id="employeeDetails" className='mt-10 mb-10'>
@@ -63,6 +78,9 @@ const AdminEmployee = () => {
                     <td>{employee.gender}</td>
                     <td>{employee.departmentName}</td>
                     <td>{employee.salary}</td>
+                    <td><button
+                      onClick={() => handleDelete(employee._id)}
+                      className='bg-black p-2 text-white rounded-lg font-rubik hover:scale-95'>delete</button></td>
                   </tr>
                 ))}
               </tbody>

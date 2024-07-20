@@ -16,7 +16,7 @@ const UnAllocatedRooms = () => {
         }
 
         getInfo();
-    }, [])
+    }, [roomInfo])
 
 
 
@@ -40,7 +40,7 @@ const UnAllocatedRooms = () => {
                                 {/* row 1 */}
                                 {
                                     roomInfo.map((room, index) => (
-                                        <tr>
+                                        <tr key={index+1}>
                                             <th>{index+1}</th>
                                             <td>{room._id}</td>
                                             <td>{room.roomType}</td>

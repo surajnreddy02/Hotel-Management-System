@@ -9,7 +9,7 @@ function Payment() {
     const [cvv, setCvv] = useState("");
     const [month, setMonth] = useState("");
     const [year, setYear] = useState("");
-    const [amount, setAmount] = useState(0); // Initialize amount state
+    const [amount, setAmount] = useState(0);
     const navigate = useNavigate();
 
     const [loading, setLoading] = useState(false);
@@ -21,13 +21,28 @@ function Payment() {
                 const response = await axios.get("http://localhost:5000/api/v1/payment/amountInfo", {
                     withCredentials: true,
                 });
-                console.log("The data is ", response.data.data);
 
-                // Assuming that data is an array and you want the first item
                 if (response.data.data.length > 0) {
                     const roomInfo = response.data.data[0].roomInfo;
                     if (roomInfo) {
-                        setAmount(roomInfo.cost); // Set the amount from roomInfo
+                        console.log("checkInTime:", roomInfo.checkInTime);
+                        console.log("checkOutTime:", roomInfo.checkOutTime);
+
+                        const checkInTime = new Date(roomInfo.checkInTime);
+                        const checkOutTime = new Date(roomInfo.checkOutTime);
+                        console.log("Parsed checkInTime:", checkInTime);
+                        console.log("Parsed checkOutTime:", checkOutTime);
+
+                        const timeDifference = checkOutTime - checkInTime; // Difference in milliseconds
+                        console.log("Time difference in milliseconds:", timeDifference);
+
+                        const days = Math.ceil(timeDifference / (1000 * 3600 * 24)); // Convert milliseconds to days
+                        console.log("Days:", days);
+
+                        const totalCost = days * roomInfo.cost;
+                        console.log("Total cost:", totalCost);
+
+                        setAmount(totalCost);
                     }
                 }
             } catch (error) {
@@ -41,7 +56,7 @@ function Payment() {
         e.preventDefault();
         setLoading(true);
         try {
-            const payment = await axios.post("http://localhost:5000/api/v1/payment/pay", {
+            await axios.post("http://localhost:5000/api/v1/payment/pay", {
                 username,
                 cost: amount,
                 cardType,
@@ -52,7 +67,6 @@ function Payment() {
             }, {
                 withCredentials: true
             });
-            console.log(payment);
             navigate("/payment/success");
         } catch (error) {
             setError(error.response ? error.response.data.message : error.message);
@@ -65,6 +79,7 @@ function Payment() {
         <section className='overflow-x-hidden mt-10 ml-10 mb-10'>
             <div id="mainDiv" className="max-w-lg mx-auto bg-gray-700 p-6 rounded-lg shadow-lg text-white">
                 <h2 className="text-2xl font-bold mb-6">Payment Form</h2>
+                {error && <div className="bg-red-500 text-white p-3 rounded mb-4">{error}</div>}
                 <div id="paymentForm">
                     <form onSubmit={handleSubmit}>
                         <div className='flex gap-4 flex-col'>

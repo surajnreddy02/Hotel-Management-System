@@ -19,10 +19,10 @@ const Success = () => {
                 const response = await axios.get("http://localhost:5000/api/v1/payment/paymentInfo", {
                     withCredentials: true
                 });
-                console.log("the payment info is : ",response.data.data.payment)
-                console.log("the cast info is : ",response.data.data.cost)
+                // console.log("the payment info is : ",response.data.data.payment.cost)
+                // console.log("the cost info is : ",response.data.data.cost)
                 setPaymentInfo(response.data.data.payment);
-                setCost(response.data.data.cost)
+                setCost(response.data.data.payment.cost)
             } catch (error) {
                 console.error("Error fetching payment info:", error);
                 setError(error.message)

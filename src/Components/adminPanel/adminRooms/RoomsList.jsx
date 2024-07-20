@@ -47,7 +47,7 @@ const RoomsList = () => {
                     </thead>
                     <tbody>
                         {loading ? (<h1 className='text-3xl font-bold text-center mt-10'>Loading.....</h1>) : (rooms.map((room, index) => (
-                            <tr className='text-gray-800'>
+                            <tr key={index + 1} className='text-gray-800'>
                                 <th>{index + 1}</th>
                                 <td>{room._id}</td>
                                 <td>{room.roomType}</td>
