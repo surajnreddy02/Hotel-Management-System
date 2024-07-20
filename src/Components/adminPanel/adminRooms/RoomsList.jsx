@@ -24,6 +24,17 @@ const RoomsList = () => {
         }
         fetchRoom()
     }, [])
+    const handleDelete = async (roomId) => {
+        try {
+            const response = await axios.delete("http://localhost:5000/api/v1/rooms", {
+                data: { roomId },
+                withCredentials: true
+            })
+            setRooms((prevRoom) => prevRoom.filter((room) => room._id !== roomId))
+        } catch (error) {
+            setError(error.message)
+        }
+    }
 
 
 
@@ -52,6 +63,9 @@ const RoomsList = () => {
                                 <td>{room._id}</td>
                                 <td>{room.roomType}</td>
                                 <td>&#8377;{room.cost}</td>
+                                <td><button
+                                    onClick={() => handleDelete(room._id)}
+                                    className='bg-black p-2 text-white rounded-lg font-rubik hover:scale-95'>delete</button></td>
                             </tr>
                         )))}
 

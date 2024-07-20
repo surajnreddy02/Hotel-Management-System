@@ -25,22 +25,22 @@ function Payment() {
                 if (response.data.data.length > 0) {
                     const roomInfo = response.data.data[0].roomInfo;
                     if (roomInfo) {
-                        console.log("checkInTime:", roomInfo.checkInTime);
-                        console.log("checkOutTime:", roomInfo.checkOutTime);
+                        // console.log("checkInTime:", roomInfo.checkInTime);
+                        // console.log("checkOutTime:", roomInfo.checkOutTime);
 
                         const checkInTime = new Date(roomInfo.checkInTime);
                         const checkOutTime = new Date(roomInfo.checkOutTime);
-                        console.log("Parsed checkInTime:", checkInTime);
-                        console.log("Parsed checkOutTime:", checkOutTime);
+                        // console.log("Parsed checkInTime:", checkInTime);
+                        // console.log("Parsed checkOutTime:", checkOutTime);
 
                         const timeDifference = checkOutTime - checkInTime; // Difference in milliseconds
-                        console.log("Time difference in milliseconds:", timeDifference);
+                        // console.log("Time difference in milliseconds:", timeDifference);
 
                         const days = Math.ceil(timeDifference / (1000 * 3600 * 24)); // Convert milliseconds to days
-                        console.log("Days:", days);
+                        // console.log("Days:", days);
 
                         const totalCost = days * roomInfo.cost;
-                        console.log("Total cost:", totalCost);
+                        // console.log("Total cost:", totalCost);
 
                         setAmount(totalCost);
                     }
