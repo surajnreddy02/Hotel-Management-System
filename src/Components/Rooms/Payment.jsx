@@ -1,7 +1,8 @@
 import axios from 'axios';
 import React, { useEffect, useState } from 'react';
 import { useNavigate } from "react-router-dom";
-
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 function Payment() {
     const [username, setUserName] = useState("");
     const [cardType, setCardType] = useState("");
@@ -67,7 +68,13 @@ function Payment() {
             }, {
                 withCredentials: true
             });
-            navigate("/payment/success");
+            toast.success("Payment Successfully", {
+                onClose: () => {
+                    setTimeout(() => {
+                        navigate("/payment/success");
+                    }, 100);
+                }
+            })
         } catch (error) {
             setError(error.response ? error.response.data.message : error.message);
         } finally {
@@ -186,6 +193,7 @@ function Payment() {
                     </form>
                 </div>
             </div>
+            <ToastContainer />
         </section>
     );
 }

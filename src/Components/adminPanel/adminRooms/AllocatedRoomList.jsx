@@ -1,5 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import axios from "axios"
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 const AllocatedRoomList = () => {
     const [roomInfo, setRoomInfo] = useState([])
     const [error, setError] = useState(null);
@@ -29,10 +31,12 @@ const AllocatedRoomList = () => {
             }, {
                 withCredentials: true
             })
-            setRoomInfo((prevInfo)=> prevInfo.filter((room)=> room._id !== roomId))
+            toast.success("Room unallocated Successfully")
+            setRoomInfo((prevInfo) => prevInfo.filter((room) => room._id !== roomId))
             console.log(response.data.data)
         } catch (error) {
             setError(error.message)
+            toast.error("Failed to unallocate the room")
         }
     }
 
@@ -88,6 +92,7 @@ const AllocatedRoomList = () => {
                     </div>
                 </div>
             </div>
+            <ToastContainer />
         </section>
 
     )

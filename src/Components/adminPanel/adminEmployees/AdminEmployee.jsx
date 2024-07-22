@@ -1,6 +1,8 @@
 import axios from 'axios';
 import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 const AdminEmployee = () => {
   const { deptId } = useParams(); // Use useParams here
@@ -38,8 +40,10 @@ const AdminEmployee = () => {
         withCredentials: true
       })
       setEmployees((prevEmployee) => prevEmployee.filter((employee) => employee._id !== employeeId))
+      toast.success("Employee deleted successfully")
     } catch (error) {
       setError(error)
+      toast.error("Failed to delete the employee")
     }
   }
 
@@ -88,6 +92,7 @@ const AdminEmployee = () => {
           )}
         </div>
       </div>
+      <ToastContainer />
     </section>
   );
 };

@@ -4,6 +4,8 @@ import { DepartmentList } from "../adminIndex";
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 import { useSelector } from 'react-redux';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 
 const AdminDepartment = () => {
@@ -21,8 +23,8 @@ const AdminDepartment = () => {
     useEffect(() => {
         const fetchDepartments = async () => {
             try {
-                const response = await axios.get("http://localhost:5000/api/v1/department/departments",{
-                    withCredentials:true,
+                const response = await axios.get("http://localhost:5000/api/v1/department/departments", {
+                    withCredentials: true,
                 });
                 setDepartments(response.data.data.departments);
             } catch (error) {
@@ -44,9 +46,10 @@ const AdminDepartment = () => {
                 gender,
                 salary,
                 departmentId
-            },{
-                withCredentials:true
+            }, {
+                withCredentials: true
             });
+            toast.success("Employee Created Successfully")
             console.log("Employee added:", response.data);
             setAge("");
             setName("");
@@ -57,6 +60,7 @@ const AdminDepartment = () => {
             setDepartmentId("");
         } catch (error) {
             console.error("Error adding employee:", error);
+            toast.error("failed to create the employee");
         } finally {
             setLoading(false)
         }
@@ -156,6 +160,7 @@ const AdminDepartment = () => {
                     <DepartmentList />
                 </div>
             </div>
+            <ToastContainer />
         </section>
     );
 };

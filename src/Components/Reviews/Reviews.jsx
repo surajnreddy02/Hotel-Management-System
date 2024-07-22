@@ -1,6 +1,8 @@
 import React, { useState } from 'react';
 import axios from 'axios';
 import ReviewsList from './ReviewsList'; // Adjust the import path as necessary
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 const Reviews = () => {
     const [fullName, setFullName] = useState('');
@@ -20,14 +22,16 @@ const Reviews = () => {
                 rating,
                 message
             });
-            console.log("This is the message from the review box: ", response.data.message);
+            toast.success("Thank you for the review")
+            // console.log("This is the message from the review box: ", response.data.message);
             setFullName('');
             setEmail('');
             setRating('');
             setMessage('');
         } catch (error) {
             setError(error.message)
-            console.error("Error submitting the review: ", error.message);
+            // console.error("Error submitting the review: ", error.message);
+            toast.error("Failed to post the review")
         } finally {
             setLoading(false)
         }
@@ -86,6 +90,7 @@ const Reviews = () => {
                     </div>
                 </div>
             </div>
+            <ToastContainer />
         </section>
     );
 }

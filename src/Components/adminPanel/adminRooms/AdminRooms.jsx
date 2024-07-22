@@ -3,6 +3,7 @@ import axios from 'axios';
 import { AllocatedRoomList, RoomsList, UnAllocatedRooms } from '../adminIndex'; // Assuming RoomsList is exported from adminIndex
 import { useNavigate } from "react-router-dom"
 import { useSelector } from "react-redux"
+import { toast, ToastContainer } from 'react-toastify';
 
 const AdminRooms = () => {
     const [roomInfo, setRoomInfo] = useState('');
@@ -33,16 +34,18 @@ const AdminRooms = () => {
                 },
                 withCredentials: true
             });
-
-            console.log("the response is >>>>>", response.data);
+            toast.success("Rooms created Successfully")
+            // console.log("the response is >>>>>", response.data);
 
             setRoomInfo('');
             setRoomType('');
             setPrice('');
             setFile(null); // Reset file state to null after submission
+
         } catch (error) {
             setError(error.message);
-            console.error('Error creating room:', error);
+            // console.error('Error creating room:', error);
+            toast.error("Failed to create the room")
         }
     };
     if (loading) return (
@@ -119,7 +122,7 @@ const AdminRooms = () => {
                 </div>
             </div>
             <div id="allocationInfo" className='flex mt-20 justify-around  flex-col '>
-                <div  className='mb-10'>
+                <div className='mb-10'>
                     <h1 className='text-2xl text-cyan-950 w-4/5 text-center font-italic underline font-bold mb-4'>Unallocated Rooms</h1>
                     <div className='lg:h-[400px] max-h-96 overflow-auto'>
                         <UnAllocatedRooms />
@@ -132,6 +135,7 @@ const AdminRooms = () => {
                     </div>
                 </div>
             </div>
+            <ToastContainer />
         </section>
     );
 };

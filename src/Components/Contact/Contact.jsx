@@ -3,6 +3,8 @@ import { FaBuilding } from "react-icons/fa";
 import { FaPhoneVolume } from 'react-icons/fa';
 import { MdEmail } from 'react-icons/md';
 import axios from "axios";
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 export default function Contact() {
     const [firstName, setFirstName] = useState('');
@@ -24,6 +26,7 @@ export default function Contact() {
                 phoneNumber: phone, // Use 'phone' state variable here
                 message
             });
+            toast.success("Will reach back to you shortly")
             // console.log("Response data:", response.data);
             setFirstName('');
             setLastName('');
@@ -33,6 +36,7 @@ export default function Contact() {
         } catch (error) {
             setError(error);
             console.error("Error:", error);
+            toast.error("Failed to submit the contact form ")
         } finally {
             setLoading(false);
         }
@@ -155,6 +159,7 @@ export default function Contact() {
                     </form>
                 </div>
             </div>
+            <ToastContainer />
         </section>
     );
 }
