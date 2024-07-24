@@ -37,7 +37,7 @@ const Rooms = () => {
         };
 
         generateRooms();
-    }, []);
+    }, [luxuryRooms, presidentialRooms, premiumRooms]);
 
     // console.log("presidential rooms ", premiumRooms)
     // console.log("luxury rooms ", luxuryRooms)

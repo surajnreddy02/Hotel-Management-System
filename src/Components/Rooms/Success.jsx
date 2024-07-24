@@ -30,7 +30,7 @@ const Success = () => {
         };
 
         getPaymentInfo();
-    }, []);
+    }, [paymentInfo]);
 
     useEffect(() => {
         const timer = setTimeout(() => {

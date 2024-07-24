@@ -119,12 +119,7 @@ const RoomsInfo = () => {
                             <p className="text-gray-800 font-rubik lg:text-[16px] text-[15px] mb-2">&#8377; {room.cost} per night</p>
                             <p className="text-gray-800 font-italic text-xl font-bold"><Rating /></p>
 
-                            <Link
-                                to={`/rooms/${roomId}/payment`}
-                                className="btn w-full lg:w-4/6 hover:scale-x-105 hover:bg-black hover:text-white mt-5 transition-transform duration-300"
-                            >
-                                Proceed to Payment
-                            </Link>
+                           
                         </div>
                     </div>
                 </div>

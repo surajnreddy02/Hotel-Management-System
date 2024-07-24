@@ -78,7 +78,7 @@ const AdminDepartment = () => {
 
     return (
         <section id='EmployeeFormSection' className='mt-7 mb-20 md:ml-10 ml-2'>
-            <div id="mainDiv" className='flex items-center md:justify-around justify-center md:flex-row flex-col-reverse'>
+            <div id="mainDiv" className='flex items-center md:justify-around justify-center lg:flex-row  flex-col-reverse'>
                 <div id="employeeForm" className='mt-10 md:w-1/3 w-4/5'>
                     <form onSubmit={handleSubmit}>
                         <h2 className='text-3xl text-center text-cyan-950 font-italic font-bold underline mb-3'>Add Employee Details</h2>
@@ -156,7 +156,7 @@ const AdminDepartment = () => {
                         </div>
                     </form>
                 </div>
-                <div id='departmentList'>
+                <div id='departmentList' className='overflow-x-hidden lg:w-[600px] w-screen'>
                     <DepartmentList />
                 </div>
             </div>

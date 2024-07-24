@@ -68,7 +68,7 @@ function Payment() {
             }, {
                 withCredentials: true
             });
-            toast.success("Payment Successfully", {
+            toast.success("Payment Successfull", {
                 onClose: () => {
                     setTimeout(() => {
                         navigate("/payment/success");
