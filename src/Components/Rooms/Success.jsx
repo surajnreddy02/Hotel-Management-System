@@ -1,22 +1,25 @@
 import React, { useState, useEffect } from 'react';
 import logo from "../../assets/Logo/logo.svg";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useNavigate, useParams } from "react-router-dom";
 import successGif from "../../assets/Success/paymetSuccess.gif";
 import { TiTick } from "react-icons/ti";
 import { FaRupeeSign } from "react-icons/fa";
 import axios from 'axios';
 
 const Success = () => {
+    const { roomId } = useParams()
+    console.log(roomId)
+
     const [loading, setLoading] = useState(true);
     const [paymentInfo, setPaymentInfo] = useState({});
     const [error, setError] = useState(null)
-    const [cost,setCost] = useState('');
+    const [cost, setCost] = useState('');
     const navigate = useNavigate();
 
     useEffect(() => {
         const getPaymentInfo = async () => {
             try {
-                const response = await axios.get("http://localhost:5000/api/v1/payment/paymentInfo", {
+                const response = await axios.get(`http://localhost:5000/api/v1/payment/paymentInfo/${roomId}`, {
                     withCredentials: true
                 });
                 // console.log("the payment info is : ",response.data.data.payment.cost)
@@ -30,7 +33,7 @@ const Success = () => {
         };
 
         getPaymentInfo();
-    }, [paymentInfo]);
+    }, [roomId]);
 
     useEffect(() => {
         const timer = setTimeout(() => {

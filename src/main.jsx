@@ -27,7 +27,7 @@ const route = createBrowserRouter(
         <Route path='rooms' element={<Rooms />} />
         <Route path='rooms/:roomId' element={<RoomsInfo />} />
         <Route path='rooms/:roomId/payment' element={<Payment />} />
-        <Route path='/payment/success' element={<Success />} />
+        <Route path='/rooms/:roomId/payment/success' element={<Success />} />
         <Route path='/payment/failure' element={<Failure />} />
         <Route path='reviews' element={<Reviews />} />
         <Route path='services' element={<Services />} />

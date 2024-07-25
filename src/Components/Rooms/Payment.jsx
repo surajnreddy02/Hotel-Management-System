@@ -1,9 +1,10 @@
 import axios from 'axios';
 import React, { useEffect, useState } from 'react';
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 function Payment() {
+    const { roomId } = useParams()
     const [username, setUserName] = useState("");
     const [cardType, setCardType] = useState("");
     const [cardNumber, setCardNumber] = useState("");
@@ -71,7 +72,7 @@ function Payment() {
             toast.success("Payment Successfull", {
                 onClose: () => {
                     setTimeout(() => {
-                        navigate("/payment/success");
+                        navigate(`/rooms/${roomId}/payment/success`);
                     }, 100);
                 }
             })
