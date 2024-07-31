@@ -12,7 +12,7 @@ const RoomsList = () => {
                 const response = await axios.get("http://localhost:5000/api/v1/rooms/get-all-rooms", {
                     withCredentials: true
                 })
-                console.log(response.data.data)
+                // console.log(response.data.data)
                 setRooms(response.data.data)
             } catch (error) {
                 setError(error.message);

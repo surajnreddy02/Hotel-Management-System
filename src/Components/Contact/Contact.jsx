@@ -25,6 +25,8 @@ export default function Contact() {
                 email,
                 phoneNumber: phone, // Use 'phone' state variable here
                 message
+            }, {
+                withCredentials: true
             });
             toast.success("Will reach back to you shortly")
             // console.log("Response data:", response.data);
