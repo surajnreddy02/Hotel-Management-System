@@ -10,7 +10,7 @@ const Logout = () => {
 
     const logoutHandler = async () => {
         try {
-            const response = await axios.get("/api/users/logout", {
+            const response = await axios.get("http://localhost:5000/api/v1/users/logout", {
                 withCredentials: true, // Ensure credentials (cookies) are sent with the request
             });
             console.log("User logged out:", response.data);

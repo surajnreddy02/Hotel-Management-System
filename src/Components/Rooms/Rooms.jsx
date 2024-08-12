@@ -23,13 +23,13 @@ const Rooms = () => {
     useEffect(() => {
         const generateRooms = async () => {
             try {
-                const presidentialResponse = await axios.get("/api/rooms/get-presidential-rooms");
+                const presidentialResponse = await axios.get("http://localhost:5000/api/v1/rooms/get-presidential-rooms");
                 setPresidentialRooms(presidentialResponse.data.data);
 
-                const premiumResponse = await axios.get("/api/rooms/get-premium-rooms");
+                const premiumResponse = await axios.get("http://localhost:5000/api/v1/rooms/get-premium-rooms");
                 setPremiumRooms(premiumResponse.data.data);
 
-                const luxuryResponse = await axios.get("/api/rooms/get-luxury-rooms");
+                const luxuryResponse = await axios.get("http://localhost:5000/api/v1/rooms/get-luxury-rooms");
                 setLuxuryRooms(luxuryResponse.data.data);
             } catch (error) {
                 setError(error.message);

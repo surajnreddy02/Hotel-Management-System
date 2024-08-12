@@ -9,7 +9,7 @@ const UnAllocatedRooms = () => {
     const [roomInfo, setRoomInfo] = useState([]);
     useEffect(() => {
         const getInfo = async () => {
-            const response = await axios.get("/api/rooms/get-unallocated-room", {
+            const response = await axios.get("http://localhost:5000/api/v1/rooms/get-unallocated-room", {
                 withCredentials: true
             })
             // console.log("THe response is : ", response)

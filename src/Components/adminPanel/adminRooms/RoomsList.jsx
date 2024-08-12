@@ -9,7 +9,7 @@ const RoomsList = () => {
         const fetchRoom = async () => {
             setLoading(true)
             try {
-                const response = await axios.get("/api/rooms/get-all-rooms", {
+                const response = await axios.get("http://localhost:5000/api/v1/rooms/get-all-rooms", {
                     withCredentials: true
                 })
                 // console.log(response.data.data)
@@ -26,7 +26,7 @@ const RoomsList = () => {
     }, [])
     const handleDelete = async (roomId) => {
         try {
-            const response = await axios.delete("/api/rooms", {
+            const response = await axios.delete("http://localhost:5000/api/v1/rooms", {
                 data: { roomId },
                 withCredentials: true
             })

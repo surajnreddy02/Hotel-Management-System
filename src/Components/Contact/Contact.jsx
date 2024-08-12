@@ -19,7 +19,7 @@ export default function Contact() {
         e.preventDefault();
         setLoading(true);
         try {
-            const response = await axios.post("/api/contact/send-message", {
+            const response = await axios.post("http://localhost:5000/api/v1/contact/send-message", {
                 firstName,
                 lastName,
                 email,
