@@ -17,7 +17,7 @@ export default function AdminLogin() {
         setLoading(true);
 
         try {
-            const response = await axios.post("http://localhost:5000/api/v1/admin/login", {
+            const response = await axios.post("/api/admin/login", {
                 email,
                 password,
             }, {

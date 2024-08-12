@@ -18,7 +18,7 @@ export default function AdminSignUp() {
         setError(null);
 
         try {
-            const response = await axios.post("http://localhost:5000/api/v1/admin/create-admin",
+            const response = await axios.post("/api/admin/create-admin",
                 {
                     username,
                     email,

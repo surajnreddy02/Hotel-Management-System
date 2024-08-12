@@ -10,7 +10,7 @@ const AllocatedRoomList = () => {
     useEffect(() => {
         const getAllocatedRooms = async () => {
             try {
-                const response = await axios.get("http://localhost:5000/api/v1/rooms/get-allocated-rooms", {
+                const response = await axios.get("/api/rooms/get-allocated-rooms", {
                     withCredentials: true
                 })
                 setRoomInfo(response.data.data)
@@ -26,7 +26,7 @@ const AllocatedRoomList = () => {
 
     const handleUnAllocate = async (roomId) => {
         try {
-            const response = await axios.post("http://localhost:5000/api/v1/admin/deallocate-room", {
+            const response = await axios.post("/api/admin/deallocate-room", {
                 roomId
             }, {
                 withCredentials: true

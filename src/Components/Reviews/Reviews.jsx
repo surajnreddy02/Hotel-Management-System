@@ -16,7 +16,7 @@ const Reviews = () => {
         e.preventDefault();
         setLoading(true)
         try {
-            const response = await axios.post("http://localhost:5000/api/v1/review/post-review", {
+            const response = await axios.post("/api/review/post-review", {
                 fullName,
                 email,
                 rating,

@@ -11,7 +11,7 @@ const ReviewsList = () => {
         const fetchAllReviews = async () => {
             setLoading(true);
             try {
-                const response = await axios.get("http://localhost:5000/api/v1/review/get-reviews");
+                const response = await axios.get("/api/review/get-reviews");
                 setReviews(response.data.data); // Accessing reviews from the `data` property of the response
                 console.log("The data is of the type: ",response.data.data);
             } catch (error) {
