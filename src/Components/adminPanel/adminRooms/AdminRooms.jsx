@@ -116,7 +116,7 @@ const AdminRooms = () => {
                 </div>
                 <div className='overflow-x-auto'>
                     <h1 className='text-2xl text-cyan-950 text-center font-italic underline font-bold mb-4'>Rooms List</h1>
-                    <div className='h-96 w-screen'>
+                    <div className='h-96 md:w-4/5 w-screen'>
                         <RoomsList />
                     </div>
                 </div>
