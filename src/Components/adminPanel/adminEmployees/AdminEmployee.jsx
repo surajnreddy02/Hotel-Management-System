@@ -34,7 +34,7 @@ const AdminEmployee = () => {
 
   const handleDelete = async (employeeId) => {
     try {
-      const response = await axios.post("http://localhost:5000/api/v1/employee/remove-employee", {
+      const response = await axios.post(`${import.meta.env.VITE_API_URL}/api/v1/employee/remove-employee`, {
         employeeId
       }, {
         withCredentials: true

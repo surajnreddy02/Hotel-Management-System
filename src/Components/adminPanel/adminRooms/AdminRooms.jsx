@@ -28,7 +28,7 @@ const AdminRooms = () => {
 
             console.log("the form data is :?>>>>", formData);
 
-            const response = await axios.post('http://localhost:5000/api/v1/rooms/create-room', formData, {
+            const response = await axios.post(`${import.meta.env.VITE_API_URL}/api/v1/rooms/create-room`, formData, {
                 headers: {
                     'Content-Type': 'multipart/form-data'
                 },

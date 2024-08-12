@@ -19,7 +19,7 @@ const RoomsInfo = () => {
     useEffect(() => {
         const getRoomInfo = async () => {
             try {
-                const response = await axios.get(`http://localhost:5000/api/v1/rooms/get-room/${roomId}`, {
+                const response = await axios.get(`${import.meta.env.VITE_API_URL}/api/v1/rooms/get-room/${roomId}`, {
                     withCredentials: true
                 });
                 setRoom(response.data.data);
@@ -37,7 +37,7 @@ const RoomsInfo = () => {
     const handleSubmit = async (e) => {
         e.preventDefault();
         try {
-            const response = await axios.post(`http://localhost:5000/api/v1/users/book-room/${roomId}`, {
+            const response = await axios.post(`${import.meta.env.VITE_API_URL}/api/v1/users/book-room/${roomId}`, {
                 checkInTime: new Date(checkInTime).toISOString(), // Ensure date format is suitable for MongoDB
                 checkOutTime: new Date(checkOutTime).toISOString() // Ensure date format is suitable for MongoDB
             }, {
@@ -119,7 +119,7 @@ const RoomsInfo = () => {
                             <p className="text-gray-800 font-rubik lg:text-[16px] text-[15px] mb-2">&#8377; {room.cost} per night</p>
                             <p className="text-gray-800 font-italic text-xl font-bold"><Rating /></p>
 
-                           
+
                         </div>
                     </div>
                 </div>

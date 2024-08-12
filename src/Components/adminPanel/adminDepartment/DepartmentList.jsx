@@ -11,7 +11,7 @@ const DepartmentList = () => {
         const getDepartments = async () => {
             setLoading(true);
             try {
-                const response = await axios.get("http://localhost:5000/api/v1/department/departments", {
+                const response = await axios.get(`${import.meta.env.VITE_API_URL}/api/v1/department/departments`, {
                     withCredentials: true
                 });
                 const { departments, employeeCount } = response.data.data;
@@ -20,7 +20,7 @@ const DepartmentList = () => {
                     const countInfo = employeeCount.find(count => count.departmentName === dept.departmentName);
                     return {
                         ...dept,
-                        totalEmp: countInfo ? countInfo.totalEmp : 0 
+                        totalEmp: countInfo ? countInfo.totalEmp : 0
                     };
                 });
 

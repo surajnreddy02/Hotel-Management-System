@@ -19,7 +19,7 @@ const Success = () => {
     useEffect(() => {
         const getPaymentInfo = async () => {
             try {
-                const response = await axios.get(`http://localhost:5000/api/v1/payment/paymentInfo/${roomId}`, {
+                const response = await axios.get(`${import.meta.env.VITE_API_URL}/api/v1/payment/paymentInfo/${roomId}`, {
                     withCredentials: true
                 });
                 // console.log("the payment info is : ",response.data.data.payment.cost)

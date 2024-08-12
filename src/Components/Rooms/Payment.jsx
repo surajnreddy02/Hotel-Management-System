@@ -20,7 +20,7 @@ function Payment() {
     useEffect(() => {
         const getAmountInfo = async () => {
             try {
-                const response = await axios.get("http://localhost:5000/api/v1/payment/amountInfo", {
+                const response = await axios.get(`${import.meta.env.VITE_API_URL}/api/v1/payment/amountInfo`, {
                     withCredentials: true,
                 });
 
@@ -58,7 +58,7 @@ function Payment() {
         e.preventDefault();
         setLoading(true);
         try {
-            await axios.post("http://localhost:5000/api/v1/payment/pay", {
+            await axios.post(`${import.meta.env.VITE_API_URL}/api/v1/payment/pay`, {
                 username,
                 cost: amount,
                 cardType,

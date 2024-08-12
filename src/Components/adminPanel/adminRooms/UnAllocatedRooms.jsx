@@ -9,7 +9,7 @@ const UnAllocatedRooms = () => {
     const [roomInfo, setRoomInfo] = useState([]);
     useEffect(() => {
         const getInfo = async () => {
-            const response = await axios.get("http://localhost:5000/api/v1/rooms/get-unallocated-room", {
+            const response = await axios.get(`${import.meta.env.VITE_API_URL}/api/v1/rooms/get-unallocated-room`, {
                 withCredentials: true
             })
             // console.log("THe response is : ", response)

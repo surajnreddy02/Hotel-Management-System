@@ -23,7 +23,7 @@ const AdminDepartment = () => {
     useEffect(() => {
         const fetchDepartments = async () => {
             try {
-                const response = await axios.get("http://localhost:5000/api/v1/department/departments", {
+                const response = await axios.get(`${import.meta.env.VITE_API_URL}/api/v1/department/departments`, {
                     withCredentials: true,
                 });
                 setDepartments(response.data.data.departments);
@@ -38,7 +38,7 @@ const AdminDepartment = () => {
         setLoading(true)
         e.preventDefault();
         try {
-            const response = await axios.post("http://localhost:5000/api/v1/employee/add-employee", {
+            const response = await axios.post(`${import.meta.env.VITE_API_URL}/api/v1/employee/add-employee`, {
                 age,
                 name,
                 designation,
