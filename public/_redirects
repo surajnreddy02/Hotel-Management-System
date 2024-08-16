@@ -1,1 +1,9 @@
+
+/*
+When deploying a React application with React Router to Netlify, you might encounter issues with routing because Netlify's default configuration serves index.html for all routes, but the routes in your React app might not be handled properly by Netlify.
+
+To fix this, you need to create a _redirects file in the public directory of your React project with the following content:
+/* /index.html 200
+
+*/
 /* /index.html 200
